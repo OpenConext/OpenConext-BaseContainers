@@ -34,4 +34,8 @@ RUN apt-get install -y php7.2 \
 # Clean up
 RUN apt autoremove -y && apt clean && apt autoclean && rm -rf /var/lib/apt/lists/*
 
+# Add the PHP conf files
+COPY conf/php.ini /etc/php/7.2/fpm/php.ini
+COPY conf/www.conf /etc/php/7.2/fpm/pool.d/www.conf
+
 CMD ["php-fpm7.2" "-F"]
