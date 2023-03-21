@@ -38,4 +38,9 @@ RUN apt autoremove -y && apt clean && apt autoclean && rm -rf /var/lib/apt/lists
 COPY conf/php.ini /etc/php/7.2/fpm/php.ini
 COPY conf/www.conf /etc/php/7.2/fpm/pool.d/www.conf
 
-CMD ["php-fpm7.2" "-F"]
+# Add the startup script
+COPY bin/start.sh /usr/local/bin/start.sh
+
+EXPOSE 80
+
+CMD ["/usr/local/bin/start.sh"]
