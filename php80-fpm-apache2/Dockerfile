@@ -18,25 +18,25 @@ RUN echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt
     wget -qO - https://packages.sury.org/php/apt.gpg | apt-key add - && \
     apt update
 
-# Install PHP 7.2, FPM and Apache2
-RUN apt install -y php7.2 \
-        php7.2-fpm \
-        php7.2-soap \
-        php7.2-gd \
-        php7.2-mysql \
-        php7.2-opcache \
-        php7.2-xml \
-        php7.2-mbstring \
-        php7.2-apcu \
-        php7.2-curl \
+# Install PHP 8.0, FPM and Apache2
+RUN apt install -y php8.0 \
+        php8.0-fpm \
+        php8.0-soap \
+        php8.0-gd \
+        php8.0-mysql \
+        php8.0-opcache \
+        php8.0-xml \
+        php8.0-mbstring \
+        php8.0-apcu \
+        php8.0-curl \
         apache2
 
 # Clean up
 RUN apt autoremove -y && apt clean && apt autoclean && rm -rf /var/lib/apt/lists/*
 
 # Add the PHP conf files
-COPY conf/php.ini /etc/php/7.2/fpm/php.ini
-COPY conf/www.conf /etc/php/7.2/fpm/pool.d/www.conf
+COPY conf/php.ini /etc/php/8.0/fpm/php.ini
+COPY conf/www.conf /etc/php/8.0/fpm/pool.d/www.conf
 
 # Add the startup script
 COPY bin/start.sh /usr/local/bin/start.sh
