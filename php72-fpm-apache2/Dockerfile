@@ -2,7 +2,7 @@ FROM debian:bullseye-20230227-slim
 
 # Do an initial clean up and general upgrade of the distribution
 RUN apt clean && apt autoclean && apt update
-RUN apt upgrade && apt dist-upgrade
+RUN apt -y upgrade && apt -y dist-upgrade
 
 # Install the packages we need
 RUN apt install -y software-properties-common \
