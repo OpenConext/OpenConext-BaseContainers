@@ -8,7 +8,7 @@ on:
     - cron: '10 7 * * *'
 
 jobs:
-  docker:
+  build-push-php80:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -37,5 +37,5 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: |
-            ghcr.io/OpenConext/php80-fpm-apache2:latest
-            ghcr.io/OpenConext/php80-fpm-apache2:${{ steps.vars.outputs.sha_short }}
+            ghcr.io/openconext/php80-fpm-apache2:latest
+            ghcr.io/openconext/php80-fpm-apache2:${{ steps.vars.outputs.sha_short }}
