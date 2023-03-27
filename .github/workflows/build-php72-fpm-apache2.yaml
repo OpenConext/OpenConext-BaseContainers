@@ -33,9 +33,9 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v4
         with:
-          context: .
+          context: ./php72-fpm-apache2
           platforms: linux/amd64,linux/arm64
           push: true
           tags: |
             ghcr.io/openconext-basecontainers/php72-fpm-apache2:latest
-            ghcr.io/openconext-basecontainers/php72-fpm-apache2:${{ steps.vars.outputs.sha_short }}
+            ghcr.io/openconext-basecontainers/php72-fpm-apache2:${{ github.sha }}
