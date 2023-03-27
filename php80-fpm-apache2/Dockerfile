@@ -1,4 +1,4 @@
-php80-fpm-apache2/DockerfileFROM debian:bullseye-20230227-slim
+FROM debian:bullseye-20230227-slim
 
 # Do an initial clean up and general upgrade of the distribution
 ENV DEBIAN_FRONTEND noninteractive
