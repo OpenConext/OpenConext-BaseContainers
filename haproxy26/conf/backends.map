@@ -1,0 +1,7 @@
+azuremfa.dev.openconext.org azuremfa_be
+gateway.dev.openconext.org gateway_be
+middleware.dev.openconext.org middleware_be
+ra.dev.openconext.org ra_be
+selfservice.dev.openconext.org selfservice_be
+tiqr.dev.openconext.org tiqr_be
+webauthn.dev.openconext.org webauthn_be
