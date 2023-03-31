@@ -34,6 +34,7 @@ COPY conf/www.conf /etc/php/7.2/fpm/pool.d/www.conf
 # Add the startup script
 COPY bin/start.sh /usr/local/bin/start.sh
 
+# Default port to listen on
 EXPOSE 80
 
 CMD ["/usr/local/bin/start.sh"]
