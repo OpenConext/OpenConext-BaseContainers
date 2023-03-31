@@ -3,9 +3,9 @@ name: Build the PHP 7.2 FPM Apache2 container
 on:
   push:
     branches:
-      - "main"
+      - main
     paths:
-      - "php72-fpm-apache2/*"
+      - php72-fpm-apache2/**
   schedule:
     - cron: '0 7 * * *'
 
