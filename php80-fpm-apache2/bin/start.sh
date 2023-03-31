@@ -1,14 +1,8 @@
 #!/usr/bin/env bash
 
-# Read the application environment from the parameters
-APP_ENV=$1
+# Start PHP-FPM in the background, but still it will output messages to STDOUT
+php-fpm &
 
-# Start PHP-Fpm in the background
-service php8.0-fpm start
-
-# Start Apache2 in the background
-service apache2 start
-
-# Tail the Apache2 and PHP-Fpm logs
-tail -f /var/log/apache2/*.log /var/log/php8.0-fpm.log
-
+# Start Apache2 in the background, tail its logs so they get printed to STDOUT
+apache2ctl start
+tail -f /var/log/apache2/*.log
