@@ -1,4 +1,4 @@
-FROM debian:bullseye-20230227-slim
+FROM php:7.2-fpm-buster
 
 # Do an initial clean up and general upgrade of the distribution
 ENV DEBIAN_FRONTEND noninteractive
@@ -6,31 +6,23 @@ RUN apt clean && apt autoclean && apt update
 RUN apt -y upgrade && apt -y dist-upgrade
 
 # Install the packages we need
-RUN apt install -y software-properties-common \
-        ca-certificates \
-        lsb-release \
-        apt-transport-https \
-        curl \
-        wget \
-        gnupg
+RUN apt install -y curl \
+        apache2 \
+        libxml2 \
+        libxml2-dev \
+        libfreetype6-dev \
+        libjpeg62-turbo-dev \
+        libpng-dev
 
-# Add the sury.org dpkg repository for the PHP packages
-RUN echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list && \
-    wget -qO - https://packages.sury.org/php/apt.gpg | apt-key add - && \
-    apt update
-
-# Install PHP 7.2, FPM and Apache2
-RUN apt install -y php7.2 \
-        php7.2-fpm \
-        php7.2-soap \
-        php7.2-gd \
-        php7.2-mysql \
-        php7.2-opcache \
-        php7.2-xml \
-        php7.2-mbstring \
-        php7.2-apcu \
-        php7.2-curl \
-        apache2
+# Install the PHP 7.2 extensions we need
+RUN docker-php-ext-install soap \
+        gd \
+        mysqli \
+        pdo \
+        pdo_mysql \
+        opcache \
+        xml \
+        mbstring
 
 # Clean up
 RUN apt autoremove -y && apt clean && apt autoclean && rm -rf /var/lib/apt/lists/*
