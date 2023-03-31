@@ -3,9 +3,9 @@ name: Build the PHP 8.0 FPM Apache2 container
 on:
   push:
     branches:
-      - "main"
+      - main
     paths:
-      - "php80-fpm-apache2"
+      - php80-fpm-apache2/**
   schedule:
     - cron: '30 7 * * *'
 
