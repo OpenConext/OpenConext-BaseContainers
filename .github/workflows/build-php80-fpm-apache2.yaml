@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - "main"
+    paths:
+      - "php80-fpm-apache2"
   schedule:
     - cron: '30 7 * * *'
 
