@@ -31,6 +31,9 @@ RUN docker-php-ext-install soap \
 # Clean up
 RUN apt autoremove -y && apt clean && apt autoclean && rm -rf /var/lib/apt/lists/*
 
+# Enable the Apache2 modules we need
+RUN a2enmod rewrite headers expires
+
 # Add the PHP conf files
 COPY conf/php.ini /etc/php/7.2/fpm/php.ini
 COPY conf/www.conf /etc/php/7.2/fpm/pool.d/www.conf
