@@ -31,7 +31,7 @@ RUN docker-php-ext-install soap \
 RUN apt autoremove -y && apt clean && apt autoclean && rm -rf /var/lib/apt/lists/*
 
 # Enable the Apache2 modules we need
-RUN a2enmod rewrite headers expires
+RUN a2enmod rewrite headers expires proxy_fcgi
 
 # Add the PHP conf files
 COPY conf/php.ini /etc/php/8.0/fpm/php.ini
