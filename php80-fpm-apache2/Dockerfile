@@ -35,7 +35,6 @@ RUN a2enmod rewrite headers expires proxy_fcgi
 
 # Add the PHP conf files
 COPY conf/php.ini /etc/php/8.0/fpm/php.ini
-COPY conf/www.conf /etc/php/8.0/fpm/pool.d/www.conf
 
 # Add the startup script
 COPY bin/start.sh /usr/local/bin/start.sh
