@@ -37,6 +37,11 @@ RUN a2enmod rewrite headers expires proxy_fcgi
 # Add the PHP conf files
 COPY conf/php.ini /etc/php/7.2/fpm/php.ini
 
+# Create the log files for php-fpm
+RUN touch /usr/local/var/log/php-fpm-error.log; \
+    touch /usr/local/var/log/php-fpm-access.log; \
+    chown www-data /usr/local/var/log/ -R
+
 # Add the startup script
 COPY bin/start.sh /usr/local/bin/start.sh
 
