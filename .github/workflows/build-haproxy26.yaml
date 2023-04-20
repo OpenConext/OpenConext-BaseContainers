@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - "main"
+      - "feature/haproxy-26"
   schedule:
     - cron: '30 7 * * *'
 
