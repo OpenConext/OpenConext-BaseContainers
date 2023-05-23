@@ -11,21 +11,28 @@ RUN apt -y upgrade && apt -y dist-upgrade
 
 # Install the packages we need
 RUN apt install -y curl \
-        libxml2 \
-        libxml2-dev \
-        libfreetype6-dev \
-        libjpeg62-turbo-dev \
-        libpng-dev
+  libxml2 \
+  libxml2-dev \
+  libfreetype6-dev \
+  libjpeg62-turbo-dev \
+  libpng-dev \
+  libgmp3-dev
 
 # Install the PHP 7.2 extensions we need
 RUN docker-php-ext-install soap \
-        gd \
-        mysqli \
-        pdo \
-        pdo_mysql \
-        opcache \
-        xml \
-        mbstring
+  gd \
+  mysqli \
+  pdo_mysql \
+  opcache \
+  intl \
+  gmp 
+
+# Use pecl to install acpu
+RUN pecl install -f apcu && \ 
+  pecl install -f apcu_bc
+
+COPY ./conf/apcu.ini /usr/local/etc/php/conf.d/000-docker-php-apcu.ini   
+COPY ./conf/apc.ini /usr/local/etc/php/conf.d/docker-php-apc.ini   
 
 # Clean up
 RUN apt autoremove -y && apt clean && apt autoclean && rm -rf /var/lib/apt/lists/*
