@@ -5,3 +5,4 @@ ra.dev.openconext.local ra_be
 selfservice.dev.openconext.local selfservice_be
 tiqr.dev.openconext.local tiqr_be
 webauthn.dev.openconext.local webauthn_be
+ssp.dev.openconext.local ssp_be
