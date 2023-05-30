@@ -11,20 +11,13 @@ RUN apt -y upgrade && apt -y dist-upgrade
 
 # Install the packages we need
 RUN apt install -y curl \
-        libxml2 \
-        libxml2-dev \
-        libfreetype6-dev \
-        libjpeg62-turbo-dev \
-        libpng-dev
+  libgmp-dev \
+  libicu-dev
 
-# Install the PHP 7.2 extensions we need
-RUN docker-php-ext-install soap \
-        gd \
-        mysqli \
-        pdo \
-        pdo_mysql \
-        opcache \
-        xml
+# Install the PHP extensions we need
+RUN docker-php-ext-install gmp \
+  opcache  \
+  intl
 
 # Clean up
 RUN apt autoremove -y && apt clean && apt autoclean && rm -rf /var/lib/apt/lists/*
