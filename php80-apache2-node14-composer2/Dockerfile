@@ -6,4 +6,4 @@ RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | b
 RUN nvm install 14
 RUN npm install -g yarn
 RUN pecl install xdebug-3.2.0 && docker-php-ext-enable xdebug
-
+COPY ./conf/xdebug.ini /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
