@@ -9,7 +9,7 @@ on:
     - cron: '30 7 * * *'
 
 jobs:
-  build-push-php80:
+  build-push-haproxy26:
     runs-on: ubuntu-latest
     permissions:
       packages: write
