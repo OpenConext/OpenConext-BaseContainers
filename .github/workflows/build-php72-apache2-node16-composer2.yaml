@@ -1,4 +1,4 @@
-name: Build the PHP 7.2 Apache2 Node14 Composer2 container
+name: Build the PHP 7.2 Apache2 Node16 Composer2 container
 
 on:
   push:
@@ -8,6 +8,8 @@ on:
       - php72-apache2-node16-composer2/**
   schedule:
     - cron: '0 7 * * *'
+  workflow_dispatch:
+    
 
 jobs:
   build-push-php72:
