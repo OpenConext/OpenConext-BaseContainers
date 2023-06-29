@@ -1,16 +1,16 @@
-name: Build the PHP 8.0 Apache2 container
+name: Build the PHP 8.2 FPM Apache2 container
 
 on:
   push:
     branches:
       - main
     paths:
-      - php80-apache2/**
+      - php82-fpm-apache2/**
   schedule:
     - cron: '30 7 * * *'
 
 jobs:
-  build-push-php80:
+  build-push-php82:
     runs-on: ubuntu-latest
     permissions:
       packages: write
@@ -34,9 +34,9 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v4
         with:
-          context: ./php80-apache2
+          context: ./php82-fpm-apache2
           platforms: linux/amd64,linux/arm64
           push: true
           tags: |
-            ghcr.io/openconext/openconext-basecontainers/php80-apache2:latest
-            ghcr.io/openconext/openconext-basecontainers/php80-apache2:${{ github.sha }}
+            ghcr.io/openconext/openconext-basecontainers/php82-fpm-apache2:latest
+            ghcr.io/openconext/openconext-basecontainers/php82-fpm-apache2:${{ github.sha }}

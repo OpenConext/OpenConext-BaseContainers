@@ -1,4 +1,4 @@
-FROM php:8.0.28-apache-bullseye
+FROM php:8.2.6-apache-bullseye
 
 # Copy the Composer PHAR from the Composer image into the PHP image
 COPY --from=composer:1.9.3 /usr/bin/composer /usr/bin/composer

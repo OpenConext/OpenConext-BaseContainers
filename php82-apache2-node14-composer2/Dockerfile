@@ -1,4 +1,4 @@
-FROM ghcr.io/openconext/openconext-basecontainers/php80-apache2:latest
+FROM ghcr.io/openconext/openconext-basecontainers/php82-apache2:latest
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 SHELL ["/bin/bash", "--login", "-c"]
 RUN apt update && apt -y install git unzip
