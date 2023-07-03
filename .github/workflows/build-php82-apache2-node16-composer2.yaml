@@ -34,7 +34,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v4
         with:
-          context: ./php82-apache2-node14-composer2
+          context: ./php82-apache2-node16-composer2
           platforms: linux/amd64,linux/arm64
           push: true
           tags: |
