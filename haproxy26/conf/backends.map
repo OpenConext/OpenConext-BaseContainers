@@ -7,3 +7,4 @@ tiqr.dev.openconext.local tiqr_be
 webauthn.dev.openconext.local webauthn_be
 ssp.dev.openconext.local ssp_be
 demogssp.dev.openconext.local demogssp_be
+stepupapi.dev.openconext.local stepupapi_be
