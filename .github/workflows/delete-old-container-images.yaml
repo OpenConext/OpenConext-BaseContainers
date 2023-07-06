@@ -28,7 +28,7 @@ jobs:
       - name: Delete all containers older than 2 weeks
         uses: snok/container-retention-policy@v2
         with:
-          image-names: *php*, *haproxy*
+          image-names: *php*
           cut-off: Two weeks ago UTC
           account-type: org
           org-name: OpenConext
