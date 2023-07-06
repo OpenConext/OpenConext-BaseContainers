@@ -8,8 +8,8 @@ on:
       - main
 
 jobs:
-  clean-ghcr:
-    name: Delete old unused container images
+  clean-php72-fpm-apache2:
+    name: Delete old unused container images from php72-fpm-apache2
     runs-on: ubuntu-latest
     steps:
       - name: Delete all but the latest 7 versions
@@ -21,17 +21,146 @@ jobs:
           min-versions-to-keep: 7
           delete-only-untagged-versions: 'false'
           ignore-versions: '/latest/g'
-#  clean-ghcr:
-#    name: Delete old unused container images
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Delete all containers older than 2 weeks
-#        uses: snok/container-retention-policy@v2
-#        with:
-#          image-names: '*php*'
-#          cut-off: Two weeks ago UTC
-#          account-type: org
-#          org-name: OpenConext
-#          keep-at-least: 1
-#          untagged-only: false
-#          token: ${{ secrets.GITHUB_TOKEN }}
+  clean-php82-fpm-apache2:
+    name: Delete old unused container images from php82-fpm-apache2
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete all but the latest 7 versions
+        uses: actions/delete-package-versions@v4
+        with:
+          package-name: 'openconext-basecontainers/php82-fpm-apache2'
+          package-type: 'container'
+          token: ${{ secrets.GITHUB_TOKEN }}
+          min-versions-to-keep: 7
+          delete-only-untagged-versions: 'false'
+          ignore-versions: '/latest/g'
+  clean-php82-apache2:
+    name: Delete old unused container images from php82-apache2
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete all but the latest 7 versions
+        uses: actions/delete-package-versions@v4
+        with:
+          package-name: 'openconext-basecontainers/php82-apache2'
+          package-type: 'container'
+          token: ${{ secrets.GITHUB_TOKEN }}
+          min-versions-to-keep: 7
+          delete-only-untagged-versions: 'false'
+          ignore-versions: '/latest/g'
+  clean-php72-apache2-node14-composer2:
+    name: Delete old unused container images from php72-apache2-node14-composer2
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete all but the latest 7 versions
+        uses: actions/delete-package-versions@v4
+        with:
+          package-name: 'openconext-basecontainers/php72-apache2-node14-composer2'
+          package-type: 'container'
+          token: ${{ secrets.GITHUB_TOKEN }}
+          min-versions-to-keep: 7
+          delete-only-untagged-versions: 'false'
+          ignore-versions: '/latest/g'
+  clean-php82-apache2-node14-composer2:
+    name: Delete old unused container images from php82-apache2-node14-composer2
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete all but the latest 7 versions
+        uses: actions/delete-package-versions@v4
+        with:
+          package-name: 'openconext-basecontainers/php82-apache2-node14-composer2'
+          package-type: 'container'
+          token: ${{ secrets.GITHUB_TOKEN }}
+          min-versions-to-keep: 7
+          delete-only-untagged-versions: 'false'
+          ignore-versions: '/latest/g'
+  clean-php72-apache2-node16-composer2:
+    name: Delete old unused container images from php72-apache2-node16-composer2
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete all but the latest 7 versions
+        uses: actions/delete-package-versions@v4
+        with:
+          package-name: 'openconext-basecontainers/php72-apache2-node16-composer2'
+          package-type: 'container'
+          token: ${{ secrets.GITHUB_TOKEN }}
+          min-versions-to-keep: 7
+          delete-only-untagged-versions: 'false'
+          ignore-versions: '/latest/g'
+  clean-php82-apache2-node16-composer2:
+    name: Delete old unused container images from php82-apache2-node16-composer2
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete all but the latest 7 versions
+        uses: actions/delete-package-versions@v4
+        with:
+          package-name: 'openconext-basecontainers/php82-apache2-node16-composer2'
+          package-type: 'container'
+          token: ${{ secrets.GITHUB_TOKEN }}
+          min-versions-to-keep: 7
+          delete-only-untagged-versions: 'false'
+          ignore-versions: '/latest/g'
+  clean-php80-apache2-node14-composer2:
+    name: Delete old unused container images from php80-apache2-node14-composer2
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete all but the latest 7 versions
+        uses: actions/delete-package-versions@v4
+        with:
+          package-name: 'openconext-basecontainers/php80-apache2-node14-composer2'
+          package-type: 'container'
+          token: ${{ secrets.GITHUB_TOKEN }}
+          min-versions-to-keep: 7
+          delete-only-untagged-versions: 'false'
+          ignore-versions: '/latest/g'
+  clean-php80-apache2:
+    name: Delete old unused container images from php80-apache2
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete all but the latest 7 versions
+        uses: actions/delete-package-versions@v4
+        with:
+          package-name: 'openconext-basecontainers/php80-apache2'
+          package-type: 'container'
+          token: ${{ secrets.GITHUB_TOKEN }}
+          min-versions-to-keep: 7
+          delete-only-untagged-versions: 'false'
+          ignore-versions: '/latest/g'
+  clean-php80-fpm-apache2:
+    name: Delete old unused container images from php80-fpm-apache2
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete all but the latest 7 versions
+        uses: actions/delete-package-versions@v4
+        with:
+          package-name: 'openconext-basecontainers/php80-fpm-apache2'
+          package-type: 'container'
+          token: ${{ secrets.GITHUB_TOKEN }}
+          min-versions-to-keep: 7
+          delete-only-untagged-versions: 'false'
+          ignore-versions: '/latest/g'
+  clean-php72-apache2:
+    name: Delete old unused container images from php72-apache2
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete all but the latest 7 versions
+        uses: actions/delete-package-versions@v4
+        with:
+          package-name: 'openconext-basecontainers/php72-apache2'
+          package-type: 'container'
+          token: ${{ secrets.GITHUB_TOKEN }}
+          min-versions-to-keep: 7
+          delete-only-untagged-versions: 'false'
+          ignore-versions: '/latest/g'
+  clean-haproxy26:
+    name: Delete old unused container images from haproxy26
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete all but the latest 7 versions
+        uses: actions/delete-package-versions@v4
+        with:
+          package-name: 'openconext-basecontainers/haproxy26'
+          package-type: 'container'
+          token: ${{ secrets.GITHUB_TOKEN }}
+          min-versions-to-keep: 7
+          delete-only-untagged-versions: 'false'
+          ignore-versions: '/latest/g'
