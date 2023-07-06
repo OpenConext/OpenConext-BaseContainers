@@ -1,0 +1,19 @@
+name: Delete old container images
+
+on:
+  schedule:
+    - cron: "0 27 12 * *"
+
+jobs:
+  clean-ghcr:
+    name: Delete old unused container images
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete 'dev' containers older than a week
+        uses: actions/delete-package-versions@v4
+        with:
+          package-name: 'openconext-basecontainers/php*'
+          package-type: 'container'
+          token: ${{ secrets.GITHUB_TOKEN }}
+          min-versions-to-keep: 7
+          delete-only-untagged-versions: 'false'
