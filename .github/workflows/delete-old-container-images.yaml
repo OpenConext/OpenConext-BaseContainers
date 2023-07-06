@@ -8,30 +8,30 @@ on:
       - main
 
 jobs:
-#  clean-ghcr:
-#    name: Delete old unused container images
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Delete all but the latest 7 versions
-#        uses: actions/delete-package-versions@v4
-#        with:
-#          package-name: 'openconext-basecontainers/php*'
-#          package-type: 'container'
-#          token: ${{ secrets.GITHUB_TOKEN }}
-#          min-versions-to-keep: 7
-#          delete-only-untagged-versions: 'false'
-#          ignore-versions: '/latest/g'
   clean-ghcr:
     name: Delete old unused container images
     runs-on: ubuntu-latest
     steps:
-      - name: Delete all containers older than 2 weeks
-        uses: snok/container-retention-policy@v2
+      - name: Delete all but the latest 7 versions
+        uses: actions/delete-package-versions@v4
         with:
-          image-names: '*php*'
-          cut-off: Two weeks ago UTC
-          account-type: org
-          org-name: OpenConext
-          keep-at-least: 1
-          untagged-only: false
+          package-name: 'openconext-basecontainers/php72-fpm-apache2'
+          package-type: 'container'
           token: ${{ secrets.GITHUB_TOKEN }}
+          min-versions-to-keep: 7
+          delete-only-untagged-versions: 'false'
+          ignore-versions: '/latest/g'
+#  clean-ghcr:
+#    name: Delete old unused container images
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Delete all containers older than 2 weeks
+#        uses: snok/container-retention-policy@v2
+#        with:
+#          image-names: '*php*'
+#          cut-off: Two weeks ago UTC
+#          account-type: org
+#          org-name: OpenConext
+#          keep-at-least: 1
+#          untagged-only: false
+#          token: ${{ secrets.GITHUB_TOKEN }}
