@@ -1,11 +1,8 @@
 name: Delete old container images
 
 on:
-  #schedule:
-  #  - cron: '40 12 * * *'
-  push:
-    branches:
-      - main
+  schedule:
+    - cron: '0 1 * * *'
 
 jobs:
   clean-php72-fpm-apache2:
