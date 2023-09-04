@@ -1,4 +1,4 @@
-FROM httpd:bookworm
+FROM debian:bookworm-slim
 
 # Do an initial clean up and general upgrade of the distribution
 ENV DEBIAN_FRONTEND noninteractive
@@ -6,7 +6,7 @@ RUN apt clean && apt autoclean && apt update
 RUN apt -y upgrade && apt -y dist-upgrade
 
 # Install the packages we need
-#RUN apt install -y curl
+RUN apt install -y apache2
 
 # Clean up
 RUN apt autoremove -y && apt clean && apt autoclean && rm -rf /var/lib/apt/lists/*
@@ -23,4 +23,4 @@ WORKDIR /var/www/html
 # Default port to listen on
 EXPOSE 80
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["apache2-foreground"]
+CMD ["apache2ctl", "-D", "FOREGROUND"]
