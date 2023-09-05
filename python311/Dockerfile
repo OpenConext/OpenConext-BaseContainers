@@ -1,4 +1,4 @@
-FROM debian:bookworm-slim
+FROM debian:bookworm-slim as python311
 
 # Do an initial clean up and general upgrade of the distribution
 ENV DEBIAN_FRONTEND noninteractive
@@ -7,7 +7,9 @@ RUN apt -y upgrade && apt -y dist-upgrade
 
 # Install the packages we need
 RUN apt install -y python3 \
-  virtualenv
+  virtualenv \
+  pip \
+  pipx
 
 # Clean up
 RUN apt autoremove -y && apt clean && apt autoclean && rm -rf /var/lib/apt/lists/*
