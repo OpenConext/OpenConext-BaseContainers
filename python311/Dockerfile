@@ -8,8 +8,7 @@ RUN apt -y upgrade && apt -y dist-upgrade
 # Install the packages we need
 RUN apt install -y python3 \
   virtualenv \
-  pip \
-  pipx
+  pip
 
 # Clean up
 RUN apt autoremove -y && apt clean && apt autoclean && rm -rf /var/lib/apt/lists/*
