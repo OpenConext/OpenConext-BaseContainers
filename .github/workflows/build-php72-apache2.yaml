@@ -40,3 +40,5 @@ jobs:
           tags: |
             ghcr.io/openconext/openconext-basecontainers/php72-apache2:latest
             ghcr.io/openconext/openconext-basecontainers/php72-apache2:${{ github.sha }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
