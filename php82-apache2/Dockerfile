@@ -12,12 +12,16 @@ RUN apt -y upgrade && apt -y dist-upgrade
 # Install the packages we need
 RUN apt install -y curl \
   libgmp-dev \
-  libicu-dev
+  libicu-dev \
+  libfreetype6-dev \
+  libjpeg62-turbo-dev \
+  libpng-dev
 
 # Install the PHP extensions we need
 RUN docker-php-ext-install gmp \
   opcache  \
-  intl
+  intl \
+  gd
 
 # Clean up
 RUN apt autoremove -y && apt clean && apt autoclean && rm -rf /var/lib/apt/lists/*
