@@ -12,8 +12,18 @@ RUN apt install -y apache2 \
 # Clean up
 RUN apt autoremove -y && apt clean && apt autoclean && rm -rf /var/lib/apt/lists/*
 
+# Enable the apache2 modules we need
+RUN a2enmod authz_groupfile \
+    xml2enc \
+    headers \
+    proxy \
+    proxy_connect \
+    proxy_http \
+    rewrite
+
 # Copy the default apache config
-#COPY ./conf/httpd.conf /usr/local/apache2/conf/httpd.conf
+COPY ./conf/apache2/apache2.conf /etc/apache2/apache2.conf
+COPY ./conf/apache2/security.conf /etc/apache2/security.conf
 
 # Set the default workdir
 WORKDIR /var/www/html
