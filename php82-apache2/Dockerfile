@@ -1,8 +1,4 @@
-FROM php:8.2.6-apache-bullseye
-
-# Copy the Composer PHAR from the Composer image into the PHP image
-COPY --from=composer:1.9.3 /usr/bin/composer /usr/bin/composer
-RUN chmod +x /usr/bin/composer
+FROM php:8.2-apache-bullseye
 
 # Do an initial clean up and general upgrade of the distribution
 ENV DEBIAN_FRONTEND noninteractive
