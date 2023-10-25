@@ -22,8 +22,14 @@ RUN a2enmod authz_groupfile \
     rewrite
 
 # Copy the default apache config
-COPY ./conf/apache2/apache2.conf /etc/apache2/apache2.conf
-COPY ./conf/apache2/security.conf /etc/apache2/security.conf
+COPY ./conf/apache2.conf /etc/apache2/apache2.conf
+COPY ./conf/security.conf /etc/apache2/security.conf
+
+# Copy the startup script
+COPY ./bin/start.sh /usr/local/bin/start.sh
+
+# Create the Apache2 run dir
+RUN mkdir -p /var/run/apache2
 
 # Set the default workdir
 WORKDIR /var/www/html
@@ -32,4 +38,4 @@ WORKDIR /var/www/html
 EXPOSE 80
 
 # Start Apache
-CMD ["apache2", "-D", "foreground"]
+CMD ["/usr/local/bin/start.sh"]
