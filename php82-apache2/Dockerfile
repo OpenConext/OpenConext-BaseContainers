@@ -1,26 +1,35 @@
-FROM php:8.2.6-apache-bullseye
-
-# Copy the Composer PHAR from the Composer image into the PHP image
-COPY --from=composer:1.9.3 /usr/bin/composer /usr/bin/composer
-RUN chmod +x /usr/bin/composer
+FROM php:8.2-apache-bullseye
 
 # Do an initial clean up and general upgrade of the distribution
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt clean && apt autoclean && apt update
-RUN apt -y upgrade && apt -y dist-upgrade
 
 # Install the packages we need
 RUN apt install -y curl \
+  libpng16-16 \
+  libjpeg62-turbo \
+  libfreetype6 \
   libgmp-dev \
-  libicu-dev
-
-# Install the PHP extensions we need
-RUN docker-php-ext-install gmp \
+  libicu-dev \
+  libfreetype6-dev \
+  libjpeg62-turbo-dev \
+  libpng-dev &&\
+  docker-php-ext-configure gd --with-freetype --with-jpeg &&\
+  docker-php-ext-install -j$(nproc) gmp \
   opcache  \
-  intl
+  intl \
+  gd
 
 # Clean up
-RUN apt autoremove -y && apt clean && apt autoclean && rm -rf /var/lib/apt/lists/*
+RUN apt -y remove libgmp-dev \
+  libicu-dev \
+  libfreetype6-dev \
+  libjpeg62-turbo-dev \
+  libpng-dev && \
+  apt autoremove -y && \
+  apt clean && \
+  apt autoclean && \
+  rm -rf /var/lib/apt/lists/* 
 
 # Enable the Apache2 modules we need
 RUN a2enmod rewrite headers expires proxy_fcgi

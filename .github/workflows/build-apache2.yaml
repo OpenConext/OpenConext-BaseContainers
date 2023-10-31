@@ -1,16 +1,18 @@
-name: Build the PHP 8.2 Apache2 Node14 Composer2 container
+name: Build the Apache2 container
 
 on:
   push:
     branches:
       - main
     paths:
-      - php82-apache2-node14-composer2/**
+      - apache2/**
   schedule:
     - cron: '0 7 * * *'
+  workflow_dispatch:
+
 
 jobs:
-  build-push-php82:
+  build-push-apache2:
     runs-on: ubuntu-latest
     permissions:
       packages: write
@@ -42,12 +44,12 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v4
         with:
-          context: ./php82-apache2-node14-composer2
+          context: ./apache2
           platforms: linux/amd64,linux/arm64
           push: true
           tags: |
-            ghcr.io/openconext/openconext-basecontainers/php82-apache2-node14-composer2:latest
-            ghcr.io/openconext/openconext-basecontainers/php82-apache2-node14-composer2:${{ github.sha }}
+            ghcr.io/openconext/openconext-basecontainers/apache2:latest
+            ghcr.io/openconext/openconext-basecontainers/apache2:${{ github.sha }}
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new,mode=max
 
