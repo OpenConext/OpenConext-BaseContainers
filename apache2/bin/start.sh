@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-set -e
 
 # Check and read the user and group env vars set by the user
 # Save them for later use as they will be overwritten by the next command
@@ -21,10 +20,10 @@ if [[ -v APACHE_UID ]]; then
         if [[ -v APACHE_GUID ]]; then
             export APACHE_RUN_GROUP=$APACHE_GUID
             APACHE_GUID_TO_CREATE=$(echo $APACHE_GUID | sed 's/#//')
-            groupadd -g $APACHE_GUID_TO_CREATE openconext
-            useradd -M -u $APACHE_UID_TO_CREATE -g $APACHE_GUID_TO_CREATE openconext
+            [ $(getent group openconext) ] || groupadd -g $APACHE_GUID_TO_CREATE openconext
+            [ $(getent passwd openconext) ] || useradd -M -u $APACHE_UID_TO_CREATE -g $APACHE_GUID_TO_CREATE openconext
         else
-            useradd -M -u $APACHE_UID_TO_CREATE openconext
+            [ $(getent passwd openconext) ] || useradd -M -u $APACHE_UID_TO_CREATE openconext
     fi
 fi
 
