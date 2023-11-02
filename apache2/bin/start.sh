@@ -45,5 +45,10 @@ for dir in \
     chmod 1777 "$dir";
 done
 
+# Add the CSP policy header if it has been set in the environment
+if [[ -v HTTPD_CSP ]]; then
+    echo "Header always set Content-Security-Policy \"${HTTPD_CSP}\"" >> /etc/apache2/security.conf
+fi
+
 # Start Apache2
 apache2 -D FOREGROUND
