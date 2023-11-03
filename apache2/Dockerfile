@@ -23,7 +23,7 @@ RUN a2enmod authz_groupfile \
 
 # Copy the default apache config
 COPY ./conf/apache2.conf /etc/apache2/apache2.conf
-COPY ./conf/security.conf /etc/apache2/security.conf
+COPY ./conf/security.conf /etc/apache2/conf-available/security.conf
 
 # Copy the startup script
 COPY ./bin/start.sh /usr/local/bin/start.sh
