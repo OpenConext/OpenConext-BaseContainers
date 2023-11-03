@@ -16,6 +16,7 @@ RUN apt autoremove -y && apt clean && apt autoclean && rm -rf /var/lib/apt/lists
 RUN a2enmod authz_groupfile \
     xml2enc \
     headers \
+    ssl \
     proxy \
     proxy_connect \
     proxy_http \
