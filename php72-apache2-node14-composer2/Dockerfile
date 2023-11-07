@@ -7,3 +7,5 @@ RUN nvm install 14
 RUN npm install -g yarn
 RUN pecl install xdebug-3.1.6 && docker-php-ext-enable xdebug
 COPY ./conf/xdebug.ini /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+RUN rm -rf /etc/apache2/sites-enabled/*
+COPY ./conf/appconf.conf /etc/apache2/sites-enabled/

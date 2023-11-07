@@ -9,3 +9,6 @@ RUN pecl install xdebug-3.1.6 && docker-php-ext-enable xdebug
 COPY ./conf/xdebug.ini /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 RUN apt autoremove -y && apt clean && apt autoclean && rm -rf /var/lib/apt/lists/*
 COPY ./conf/xdebug.ini /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+RUN rm -rf /etc/apache2/sites-enabled/*
+COPY ./conf/appconf.conf /etc/apache2/sites-enabled/
+
