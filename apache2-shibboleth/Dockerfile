@@ -15,6 +15,15 @@ RUN apt autoremove -y && apt clean && apt autoclean && rm -rf /var/lib/apt/lists
 # Enable Shibboleth Apache2 module
 RUN a2enmod shib
 
+# Create the PIR directory for Shibboleth
+RUN mkdir -p /run/shibboleth
+
+# Copy config files
+COPY ./conf/shibd.logger /etc/shibboleth/shibd.logger
+
+# Copy the startup script
+COPY ./bin/start.sh /usr/local/bin/start.sh
+
 # Set the default workdir
 WORKDIR /var/www/html
 
