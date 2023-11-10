@@ -161,3 +161,29 @@ jobs:
           min-versions-to-keep: 7
           delete-only-untagged-versions: 'false'
           ignore-versions: '/latest/g'
+  clean-apache2:
+    name: Delete old unused container images from Apache2
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete all but the latest 7 versions
+        uses: actions/delete-package-versions@v4
+        with:
+          package-name: 'openconext-basecontainers/apache2'
+          package-type: 'container'
+          token: ${{ secrets.GITHUB_TOKEN }}
+          min-versions-to-keep: 7
+          delete-only-untagged-versions: 'false'
+          ignore-versions: '/latest/g'
+  clean-apache2-shibboleth:
+    name: Delete old unused container images from Apache2 Shibboleth
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete all but the latest 7 versions
+        uses: actions/delete-package-versions@v4
+        with:
+          package-name: 'openconext-basecontainers/apache2-shibboleth'
+          package-type: 'container'
+          token: ${{ secrets.GITHUB_TOKEN }}
+          min-versions-to-keep: 7
+          delete-only-untagged-versions: 'false'
+          ignore-versions: '/latest/g'
