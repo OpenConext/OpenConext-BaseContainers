@@ -6,24 +6,28 @@ RUN apt clean && apt autoclean && apt update
 
 # Install the Shibboleth daemon and Apache2 modules
 RUN apt install -y shibboleth-sp-common \
-    shibboleth-sp-utils \
-    libapache2-mod-shib
+  shibboleth-sp-utils \
+  libapache2-mod-shib \
+  gettext
 
 # Clean up
-RUN apt autoremove -y && apt clean && apt autoclean && rm -rf /var/lib/apt/lists/*
-
-# Enable Shibboleth Apache2 module
-RUN a2enmod shib
-
-# Create the PIR directory for Shibboleth
-RUN mkdir -p /run/shibboleth
+RUN apt autoremove -y && \ 
+  apt clean && \ 
+  apt autoclean && \
+  rm -rf /var/lib/apt/lists/* && \
+  a2enmod shib && \
+  mkdir -p /run/shibboleth
 
 # Copy config files
-COPY ./conf/shibd.logger /etc/shibboleth/shibd.logger
+COPY ./conf/shibboleth/* /etc/shibboleth/
 
 # Copy the startup script
 COPY ./bin/start.sh /usr/local/bin/start.sh
 
+# Copy the entrypoint script
+COPY ./bin/entrypoint.sh /entrypoint.sh
+RUN chmod 755 /entrypoint.sh
+ENTRYPOINT [ "/entrypoint.sh" ]
 # Set the default workdir
 WORKDIR /var/www/html
 
