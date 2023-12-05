@@ -31,4 +31,4 @@ WORKDIR /var/www/html
 EXPOSE 80
 
 # Start Shibboleth and Apache
-CMD ["/usr/local/bin/start.sh"]
+ENTRYPOINT ["/usr/local/bin/start.sh"]

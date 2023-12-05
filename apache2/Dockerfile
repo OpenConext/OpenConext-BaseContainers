@@ -41,4 +41,4 @@ WORKDIR /var/www/html
 EXPOSE 80
 
 # Start Apache
-CMD ["/usr/local/bin/start.sh"]
+ENTRYPOINT ["/usr/local/bin/start.sh"]

@@ -48,4 +48,4 @@ COPY bin/start.sh /usr/local/bin/start.sh
 # Default port to listen on
 EXPOSE 80
 
-CMD ["/usr/local/bin/start.sh"]
+ENTRYPOINT ["/usr/local/bin/start.sh"]
