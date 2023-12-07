@@ -38,5 +38,11 @@ RUN a2enmod rewrite headers expires proxy_fcgi
 # Set the default workdir
 WORKDIR /var/www/html
 
+# Copy the startup script
+COPY ./bin/start.sh /usr/local/bin/start.sh
+
 # Default port to listen on
 EXPOSE 80
+
+# Start Apache
+ENTRYPOINT ["/usr/local/bin/start.sh"]
