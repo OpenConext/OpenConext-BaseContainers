@@ -51,5 +51,14 @@ if [[ ! -v HTTPD_CSP ]]; then
     export HTTPD_CSP=''
 fi
 
+# Copy and import the haproxy certificate if it exists
+if [ -e /config/haproxy/haproxy.crt ]; then
+    cp /config/haproxy/haproxy.crt /usr/local/share/ca-certificates/
+    update-ca-certificates
+fi
+
 # Start Apache2
 apache2 -D FOREGROUND
+
+# Hand off to CMD
+exec "$@"
