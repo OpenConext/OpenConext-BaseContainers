@@ -30,19 +30,13 @@ RUN apt -y remove libgmp-dev \
   apt autoremove -y && \
   apt clean && \
   apt autoclean && \
-  rm -rf /var/lib/apt/lists/* 
+  rm -rf /var/lib/apt/lists/*
 
 # Enable the Apache2 modules we need
 RUN a2enmod rewrite headers expires proxy_fcgi
-
-COPY ./conf/entrypoint.sh /entrypoint.sh
-RUN chmod 755 /entrypoint.sh
 
 # Set the default workdir
 WORKDIR /var/www/html
 
 # Default port to listen on
 EXPOSE 80
-
-ENTRYPOINT ["/entrypoint.sh"]
-CMD ["apache2-foreground"]

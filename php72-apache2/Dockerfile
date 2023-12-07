@@ -25,14 +25,14 @@ RUN docker-php-ext-install soap \
   pdo_mysql \
   opcache \
   intl \
-  gmp 
+  gmp
 
 # Use pecl to install acpu
-RUN pecl install -f apcu && \ 
+RUN pecl install -f apcu && \
   pecl install -f apcu_bc
 
-COPY ./conf/apcu.ini /usr/local/etc/php/conf.d/000-docker-php-apcu.ini   
-COPY ./conf/apc.ini /usr/local/etc/php/conf.d/docker-php-apc.ini   
+COPY ./conf/apcu.ini /usr/local/etc/php/conf.d/000-docker-php-apcu.ini
+COPY ./conf/apc.ini /usr/local/etc/php/conf.d/docker-php-apc.ini
 
 # Clean up
 RUN apt autoremove -y && apt clean && apt autoclean && rm -rf /var/lib/apt/lists/*
@@ -40,13 +40,8 @@ RUN apt autoremove -y && apt clean && apt autoclean && rm -rf /var/lib/apt/lists
 # Enable the Apache2 modules we need
 RUN a2enmod rewrite headers expires proxy_fcgi
 
-COPY ./conf/entrypoint.sh /entrypoint.sh
-RUN chmod 755 /entrypoint.sh
-
 # Set the default workdir
 WORKDIR /var/www/html
 
 # Default port to listen on
 EXPOSE 80
-ENTRYPOINT ["/entrypoint.sh"]
-CMD ["apache2-foreground"]
