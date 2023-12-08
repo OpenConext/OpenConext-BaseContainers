@@ -36,3 +36,5 @@ EXPOSE 80
 
 # Start Shibboleth and Apache
 ENTRYPOINT ["/usr/local/bin/start.sh"]
+CMD["/usr/sbin/shibd","-f","-F","-c","/etc/shibboleth/shibboleth2.xml","-p","/run/shibboleth/shibd.pid","-w","30"]
+

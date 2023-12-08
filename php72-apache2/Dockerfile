@@ -51,3 +51,4 @@ EXPOSE 80
 
 # Start Apache
 ENTRYPOINT ["/usr/local/bin/start.sh"]
+CMD ["apache2-foreground"]
