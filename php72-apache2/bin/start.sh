@@ -57,8 +57,5 @@ if [ -e /config/haproxy/haproxy.crt ]; then
     update-ca-certificates
 fi
 
-# Start Apache2
-apache2 -D FOREGROUND
-
 # Hand off to CMD
 exec "$@"

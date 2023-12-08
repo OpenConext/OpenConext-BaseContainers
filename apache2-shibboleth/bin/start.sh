@@ -60,8 +60,5 @@ fi
 # Start Apache2
 apache2 -D FOREGROUND &
 
-# Start the Shibboleth daemon
-/usr/sbin/shibd -f -F -c /etc/shibboleth/shibboleth2.xml -p /run/shibboleth/shibd.pid -w 30
-
 # Hand off to CMD
 exec "$@"
