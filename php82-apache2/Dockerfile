@@ -21,23 +21,15 @@ RUN apt install -y curl \
   gd
 
 # Clean up
-RUN apt remove -y autoconf \
-    gcc g++ make \
-    dpkg-dev icu-devtools \
-    libc-dev-bin \
-    libxml2-dev:arm64 \
-    linux-libc-dev:arm64 \
-    libicu-dev:arm64 \
-    libgmp-dev \
-    libicu-dev \
-    libfreetype6-dev \
-    libjpeg62-turbo-dev \
-    libpng-dev \
-    curl && \
-    apt autoremove -y && \
-    apt clean && \
-    apt autoclean && \
-    rm -rf /var/lib/apt/lists/*
+RUN apt -y remove libgmp-dev \
+  libicu-dev \
+  libfreetype6-dev \
+  libjpeg62-turbo-dev \
+  libpng-dev && \
+  apt autoremove -y && \
+  apt clean && \
+  apt autoclean && \
+  rm -rf /var/lib/apt/lists/* 
 
 # Enable the Apache2 modules we need
 RUN a2enmod rewrite headers expires proxy_fcgi
