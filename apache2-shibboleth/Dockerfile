@@ -22,7 +22,8 @@ RUN apt autoremove -y && \
 COPY ./conf/shibboleth/* /etc/shibboleth/
 
 # Copy the startup script
-COPY ./bin/start.sh /usr/local/bin/start.sh
+COPY ./bin/entrypoint.sh /entrypoint.sh
+COPY ./bin/shib.sh /usr/local/bin/shib.sh
 
 # Copy the entrypoint script
 COPY ./bin/entrypoint.sh /entrypoint.sh
@@ -35,6 +36,6 @@ WORKDIR /var/www/html
 EXPOSE 80
 
 # Start Shibboleth and Apache
-ENTRYPOINT ["/usr/local/bin/start.sh"]
-CMD["/usr/sbin/shibd","-f","-F","-c","/etc/shibboleth/shibboleth2.xml","-p","/run/shibboleth/shibd.pid","-w","30"]
+ENTRYPOINT ["/entrypoint.sh"]
+CMD["/usr/local/bin/shib.sh"]
 
