@@ -41,7 +41,7 @@ RUN apt autoremove -y && apt clean && apt autoclean && rm -rf /var/lib/apt/lists
 RUN a2enmod rewrite headers expires proxy_fcgi
 
 # Copy the startup script
-COPY ./bin/start.sh /usr/local/bin/start.sh
+COPY ./bin/entrypoint.sh /entrypoint.sh
 
 # Set the default workdir
 WORKDIR /var/www/html
@@ -50,5 +50,5 @@ WORKDIR /var/www/html
 EXPOSE 80
 
 # Start Apache
-ENTRYPOINT ["/usr/local/bin/start.sh"]
+ENTRYPOINT ["/entrypoint.sh"]
 CMD ["apache2-foreground"]

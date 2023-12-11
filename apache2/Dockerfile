@@ -29,7 +29,7 @@ COPY ./conf/security.conf /etc/apache2/conf-available/security.conf
 COPY ./conf/default-vhost.conf /etc/apache2/sites-available/000-default.conf
 
 # Copy the startup script
-COPY ./bin/start.sh /usr/local/bin/start.sh
+COPY ./bin/entrypoint.sh /entrypoint.sh
 
 # Create the Apache2 run dir
 RUN mkdir -p /var/run/apache2
@@ -41,5 +41,5 @@ WORKDIR /var/www/html
 EXPOSE 80
 
 # Start Apache
-ENTRYPOINT ["/usr/local/bin/start.sh"]
+ENTRYPOINT ["/entrypoint.sh"]
 CMD ["apache2-foreground"]
