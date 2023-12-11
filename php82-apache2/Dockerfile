@@ -18,6 +18,7 @@ RUN apt install -y curl \
   docker-php-ext-install -j$(nproc) gmp \
   opcache  \
   intl \
+  pdo_mysql \
   gd
 
 # Clean up
