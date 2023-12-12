@@ -1,7 +1,7 @@
 FROM ghcr.io/openconext/openconext-basecontainers/php72-apache2:latest
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 SHELL ["/bin/bash", "--login", "-c"]
-RUN apt update && apt -y install git unzip
+RUN apt update && apt -y install git unzip zip
 COPY --from=node:14-slim /usr/local/bin /usr/local/bin
 COPY --from=node:14-slim /opt /opt
 COPY --from=node:14-slim /usr/local/lib/node_modules /usr/local/lib/node_modules
