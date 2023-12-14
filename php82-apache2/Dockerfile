@@ -40,6 +40,7 @@ WORKDIR /var/www/html
 
 # Copy the startup script
 COPY ./bin/entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
 # Default port to listen on
 EXPOSE 80

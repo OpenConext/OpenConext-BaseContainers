@@ -42,6 +42,7 @@ RUN a2enmod rewrite headers expires proxy_fcgi
 
 # Copy the startup script
 COPY ./bin/entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
 # Set the default workdir
 WORKDIR /var/www/html
