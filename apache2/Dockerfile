@@ -30,6 +30,7 @@ COPY ./conf/default-vhost.conf /etc/apache2/sites-available/000-default.conf
 
 # Copy the startup script
 COPY ./bin/entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
 # Create the Apache2 run dir
 RUN mkdir -p /var/run/apache2
