@@ -27,6 +27,11 @@ if [[ -v APACHE_UID ]]; then
     fi
 fi
 
+# Clear the PHP cache
+if [[ -f "/var/www/html/bin/console" ]]; then
+    exec php /var/www/html/bin/console cache:clear
+fi
+
 # Make sure the directories Apache2 needs are owned by the user running the daemon
 for dir in \
     "$APACHE_RUN_DIR" \
@@ -35,12 +40,12 @@ for dir in \
 ; do \
     if [[ -v APACHE_UID_TO_CREATE ]]; then
         if [[ -v APACHE_GUID_TO_CREATE ]]; then
-            chown "$APACHE_UID_TO_CREATE:$APACHE_GUID_TO_CREATE" "$dir";
+            chown -R "$APACHE_UID_TO_CREATE:$APACHE_GUID_TO_CREATE" "$dir";
         else
-            chown "$APACHE_UID_TO_CREATE" "$dir";
+            chown -R "$APACHE_UID_TO_CREATE" "$dir";
         fi
     else
-        chown "$APACHE_RUN_USER:$APACHE_RUN_GROUP" "$dir";
+        chown -R "$APACHE_RUN_USER:$APACHE_RUN_GROUP" "$dir";
     fi
     chmod 1777 "$dir";
 done
