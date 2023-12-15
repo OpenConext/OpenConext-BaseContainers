@@ -31,16 +31,16 @@ fi
 for dir in \
     "$APACHE_RUN_DIR" \
     "$APACHE_LOG_DIR" \
-    "/var/www/html" \
+    "/var/www/html/var/cache" \
 ; do \
     if [[ -v APACHE_UID_TO_CREATE ]]; then
         if [[ -v APACHE_GUID_TO_CREATE ]]; then
-            chown -R "$APACHE_UID_TO_CREATE:$APACHE_GUID_TO_CREATE" "$dir";
+            chown "$APACHE_UID_TO_CREATE:$APACHE_GUID_TO_CREATE" "$dir";
         else
-            chown -R "$APACHE_UID_TO_CREATE" "$dir";
+            chown "$APACHE_UID_TO_CREATE" "$dir";
         fi
     else
-        chown -R "$APACHE_RUN_USER:$APACHE_RUN_GROUP" "$dir";
+        chown "$APACHE_RUN_USER:$APACHE_RUN_GROUP" "$dir";
     fi
     chmod 1777 "$dir";
 done
