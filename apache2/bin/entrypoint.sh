@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set +e
 
 # Check and read the user and group env vars set by the user
 # Save them for later use as they will be overwritten by the next command

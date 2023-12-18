@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set +e
 
 # Check and read the user and group env vars set by the user
 # Save them for later use as they will be overwritten by the next command
@@ -29,7 +30,7 @@ fi
 
 # Clear the PHP cache
 if [[ -f "/var/www/html/bin/console" ]]; then
-    exec php /var/www/html/bin/console cache:clear
+    php /var/www/html/bin/console cache:clear
 fi
 
 # Make sure the directories Apache2 needs are owned by the user running the daemon
