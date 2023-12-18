@@ -33,11 +33,13 @@ if [[ -f "/var/www/html/bin/console" ]]; then
 fi
 
 # Make sure the directories Apache2 needs are owned by the user running the daemon
-for dir in \
-    "$APACHE_RUN_DIR" \
-    "$APACHE_LOG_DIR" \
-    "/var/www/html/var/cache" \
-; do \
+if [[ -d "/var/www/html/var/cache" ]]; then
+    apache_dirs=("$APACHE_RUN_DIR" "$APACHE_LOG_DIR" "/var/www/html/var/cache")
+else
+    apache_dirs=("$APACHE_RUN_DIR" "$APACHE_LOG_DIR")
+fi
+
+for dir in "${apache_dirs[@]}"; do
     if [[ -v APACHE_UID_TO_CREATE ]]; then
         if [[ -v APACHE_GUID_TO_CREATE ]]; then
             chown -R "$APACHE_UID_TO_CREATE:$APACHE_GUID_TO_CREATE" "$dir";
