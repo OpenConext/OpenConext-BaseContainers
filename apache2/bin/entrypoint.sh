@@ -31,7 +31,6 @@ fi
 for dir in \
     "$APACHE_RUN_DIR" \
     "$APACHE_LOG_DIR" \
-    "/var/www/html/var/cache" \
 ; do \
     if [[ -v APACHE_UID_TO_CREATE ]]; then
         if [[ -v APACHE_GUID_TO_CREATE ]]; then
