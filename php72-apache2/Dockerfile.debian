@@ -1,0 +1,59 @@
+FROM debian:bullseye-slim
+
+RUN apt clean && apt autoclean && apt update
+
+# Install Apache2 and all other packages we need
+RUN apt install -y apache2 \
+    curl \
+    wget \
+    gnupg \
+    libpng16-16 \
+    libjpeg62-turbo \
+    libfreetype6 \
+    libgmp-dev \
+    libicu-dev \
+    libfreetype6-dev \
+    libjpeg62-turbo-dev \
+    libpng-dev \
+    lsb-release
+
+# Add the Sury PHP Repo and install PHP
+RUN echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list; \
+    wget -qO - https://packages.sury.org/php/apt.gpg | apt-key add -; \
+    apt update
+RUN apt install -y php7.2 \
+    php7.2-gd \
+    php7.2-mysql \
+    php7.2-opcache \
+    php7.2-intl \
+    php7.2-gmp \
+    php7.2-apcu \
+    php7.2-apcu-bc
+
+# Cleanup
+RUN apt -y remove libgmp-dev \
+  libicu-dev \
+  libfreetype6-dev \
+  libjpeg62-turbo-dev \
+  libpng-dev && \
+  apt autoremove -y && \
+  apt clean && \
+  apt autoclean && \
+  rm -rf /var/lib/apt/lists/*
+
+# Enable the Apache2 modules we need
+RUN a2enmod php7.2 rewrite headers expires proxy_fcgi
+
+# Set the default workdir
+WORKDIR /var/www/html
+
+# Copy the startup script
+COPY ./bin/entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+# Default port to listen on
+EXPOSE 80
+
+# Start Apache
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["apache2-foreground"]
