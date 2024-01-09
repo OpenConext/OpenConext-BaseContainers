@@ -43,4 +43,4 @@ EXPOSE 80
 
 # Start Apache
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["apache2-foreground"]
+CMD ["apachectl", "-D", "FOREGROUND"]
