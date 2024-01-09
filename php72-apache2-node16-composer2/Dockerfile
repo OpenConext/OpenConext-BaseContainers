@@ -1,5 +1,4 @@
-#FROM ghcr.io/openconext/openconext-basecontainers/php72-apache2:latest
-FROM php72:test1
+FROM ghcr.io/openconext/openconext-basecontainers/php72-apache2:latest
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 COPY --from=node:16-slim /usr/local/bin /usr/local/bin
 COPY --from=node:16-slim /usr/local/lib/node_modules /usr/local/lib/node_modules
