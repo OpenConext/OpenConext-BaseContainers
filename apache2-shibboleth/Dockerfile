@@ -29,7 +29,6 @@ RUN chmod +x /entrypoint.sh ; chmod +x /usr/local/bin/shib.sh
 # Copy the entrypoint script
 COPY ./bin/entrypoint.sh /entrypoint.sh
 RUN chmod 755 /entrypoint.sh
-ENTRYPOINT [ "/entrypoint.sh" ]
 # Set the default workdir
 WORKDIR /var/www/html
 
@@ -38,5 +37,5 @@ EXPOSE 80
 
 # Start Shibboleth and Apache
 ENTRYPOINT ["/entrypoint.sh"]
-CMD["/usr/local/bin/shib.sh"]
+CMD ["/usr/local/bin/shib.sh"]
 
