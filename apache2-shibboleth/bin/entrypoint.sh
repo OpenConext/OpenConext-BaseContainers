@@ -31,7 +31,7 @@ fi
 # Make sure the directories Apache2 needs are owned by the user running the daemon
 for dir in \
 	"$APACHE_RUN_DIR" \
-	"$APACHE_LOG_DIR"; 
+	"$APACHE_LOG_DIR"; do
 	if [[ -v APACHE_UID_TO_CREATE ]]; then
 		if [[ -v APACHE_GUID_TO_CREATE ]]; then
 			chown "$APACHE_UID_TO_CREATE:$APACHE_GUID_TO_CREATE" "$dir"
