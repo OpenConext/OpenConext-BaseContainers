@@ -6,7 +6,7 @@
           clockSkew="180">
 
 <ApplicationDefaults 
-  entityID="https://dev.openconext.local" 
+  entityID="${SHIB_ENTITYID}" 
   REMOTE_USER="name-id" 
   policyId="blockUnsolicited"
   signing="false" 
@@ -25,7 +25,7 @@
           relayState="ss:mem"
           redirectLimit="exact">
 
-          <SSO entityID="https:/engine.dev.openconext.local/authentication/idp/metadata">SAML2</SSO>
+          <SSO entityID="${SHIB_REMOTE_ENTITYID}">SAML2</SSO>
           <Logout>SAML2 Local</Logout>
 
           <Handler type="MetadataGenerator" Location="/Metadata" signing="false"/>
