@@ -33,8 +33,9 @@ RUN apt -y remove libgmp-dev \
   rm -rf /var/lib/apt/lists/*
 
 # Enable the Apache2 modules we need
-RUN a2enmod rewrite headers expires proxy_fcgi
-
+RUN a2enmod rewrite headers expires proxy_fcgi remoteip
+# Copy the openconext specific config 
+COPY ./conf/openconext.conf  ./conf/security.conf  /etc/apache2/conf-enabled/
 # Set the default workdir
 WORKDIR /var/www/html
 
