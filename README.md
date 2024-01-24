@@ -4,10 +4,10 @@ We provide the following base containers which can be used in downstream project
 
 ## Apache2 containers
 **Plain Apache**</br>
-![Build status for php72 apache2 production image](https://github.com/OpenConext/OpenConext-BaseContainers/actions/workflows/build-apache2.yaml/badge.svg)
+![Build status for plain apache2 production image](https://github.com/OpenConext/OpenConext-BaseContainers/actions/workflows/build-apache2.yaml/badge.svg)
 
 **Apache 2 with shibboleth**</br>
-![Build status for php72 apache2 production image](https://github.com/OpenConext/OpenConext-BaseContainers/actions/workflows/build-apache2-shibboleth.yaml/badge.svg)
+![Build status for apache2 shibboleth production image](https://github.com/OpenConext/OpenConext-BaseContainers/actions/workflows/build-apache2-shibboleth.yaml/badge.svg)
 
 
 ## PHP 72 images
@@ -40,7 +40,8 @@ You need to prefix the uid with a # like so:
 docker run -e APACHE_UID=#1337 ghcr.io/openconext/openconext-basecontainers/php72-apache2:latest
 ```
 - You can supply the environment variable "HTTPD_CSP" which will set the CSP header on responses.
-
+- You can supply the environment variable TZ to set the timezone on the php82 containers
+- You can add PHP_MEMORY_LIMIT to override the default setting of 128M php memory limit on the php82 containers
 
 
 
