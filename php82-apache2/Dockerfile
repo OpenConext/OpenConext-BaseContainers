@@ -1,7 +1,13 @@
 FROM php:8.2-apache-bullseye
+# Set the default workdir
+WORKDIR /var/www/html
+#Some default environment variables. They can be overridden when starting the container
+ENV PHP_MEMORY_LIMIT 128M
+ENV TZ Europe/Amsterdam
 
 # Do an initial clean up and general upgrade of the distribution
 ENV DEBIAN_FRONTEND noninteractive
+
 RUN apt clean && apt autoclean && apt update
 
 # Install the packages we need
@@ -19,10 +25,8 @@ RUN apt install -y curl \
   opcache  \
   intl \
   pdo_mysql \
-  gd
-
-# Clean up
-RUN apt -y remove libgmp-dev \
+  gd &&\
+  apt -y remove libgmp-dev \
   libicu-dev \
   libfreetype6-dev \
   libjpeg62-turbo-dev \
@@ -36,9 +40,7 @@ RUN apt -y remove libgmp-dev \
 RUN a2enmod rewrite headers expires proxy_fcgi remoteip
 # Copy the openconext specific config 
 COPY ./conf/openconext.conf  ./conf/security.conf  /etc/apache2/conf-enabled/
-# Set the default workdir
-WORKDIR /var/www/html
-
+COPY ./conf/openconext.ini /usr/local/etc/php/conf.d/
 # Copy the startup script
 COPY ./bin/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
