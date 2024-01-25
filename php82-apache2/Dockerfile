@@ -40,7 +40,7 @@ RUN apt install -y curl \
 RUN a2enmod rewrite headers expires proxy_fcgi remoteip
 # Copy the openconext specific config 
 COPY ./conf/openconext.conf  ./conf/security.conf  /etc/apache2/conf-enabled/
-COPY ./conf/openconext.ini /usr/local/etc/php/conf.d/
+COPY ./conf/php.ini ./conf/php-cli.ini /usr/local/etc/php/
 # Copy the startup script
 COPY ./bin/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
