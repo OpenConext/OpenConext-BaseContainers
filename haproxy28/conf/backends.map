@@ -8,3 +8,13 @@ webauthn.dev.openconext.local webauthn_be
 ssp.dev.openconext.local ssp_be
 demogssp.dev.openconext.local demogssp_be
 stepupapi.dev.openconext.local stepupapi_be
+engine.dev.openconext.local engine_be
+engine-api.dev.openconext.local engine_be
+profile.dev.openconext.local profile_be
+mujina-idp.dev.openconext.local mujina-idp_be
+manage.dev.openconext.local manage_be
+connect.dev.openconext.local connect_be
+teams.dev.openconext.local teams_be
+voot.dev.openconext.local voot_be
+pdp.dev.openconext.local pdp_be
+aa.dev.openconext.local aa_be
