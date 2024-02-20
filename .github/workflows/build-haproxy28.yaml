@@ -4,12 +4,11 @@ on:
   push:
     branches:
       - "main"
-      - "feature/haproxy-26"
   schedule:
     - cron: '30 7 * * *'
 
 jobs:
-  build-push-haproxy26:
+  build-push-haproxy28:
     runs-on: ubuntu-latest
     permissions:
       packages: write
@@ -32,22 +31,22 @@ jobs:
 
       - name: Add the https key to the haproxy certificate file
         run: |
-          echo "${{ secrets.LOADBALANCER_HTTP_KEY }}" > ./haproxy26/conf/haproxy.pem
+          echo "${{ secrets.LOADBALANCER_HTTP_KEY }}" > ./haproxy28/conf/haproxy.pem
 
       - name: Add the https certificate to the haproxy certificate file
         run: |
-          cat ./haproxy26/conf/haproxy.crt >> ./haproxy26/conf/haproxy.pem
+          cat ./haproxy28/conf/haproxy.crt >> ./haproxy28/conf/haproxy.pem
 
       - name: Chmod the haproxy.pem
         run: |
-          chmod 444 ./haproxy26/conf/haproxy.pem
+          chmod 444 ./haproxy28/conf/haproxy.pem
 
       - name: Build and push
         uses: docker/build-push-action@v4
         with:
-          context: ./haproxy26
+          context: ./haproxy28
           platforms: linux/amd64,linux/arm64
           push: true
           tags: |
-            ghcr.io/openconext/openconext-basecontainers/haproxy26:latest
-            ghcr.io/openconext/openconext-basecontainers/haproxy26:${{ github.sha }}
+            ghcr.io/openconext/openconext-basecontainers/haproxy28:latest
+            ghcr.io/openconext/openconext-basecontainers/haproxy28:${{ github.sha }}
