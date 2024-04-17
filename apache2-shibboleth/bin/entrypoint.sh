@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set +e
-
+# Delete any leftover pid files
+rm -f /run/apache2/apache2.pid
 # Check and read the user and group env vars set by the user
 # Save them for later use as they will be overwritten by the next command
 if [[ -v APACHE_RUN_USER ]]; then
