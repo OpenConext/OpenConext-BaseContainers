@@ -32,7 +32,8 @@ RUN a2enmod authz_groupfile \
 # Copy the startup script
 COPY ./bin/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh && \
-  mkdir -p /var/run/apache2
+  mkdir -p /var/run/apache2 && \
+  rm -f /var/www/html/index.html
 
 # Set the default workdir
 WORKDIR /var/www/html
