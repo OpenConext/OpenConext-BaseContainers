@@ -11,6 +11,7 @@ RUN apt update && \
 RUN apt autoremove -y && \
   apt clean && \
   apt autoclean && \
+  apt -y upgrade && \
   rm -rf /var/lib/apt/lists/*
 
 # Copy the default apache config

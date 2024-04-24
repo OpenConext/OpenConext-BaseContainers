@@ -8,7 +8,7 @@ ENV TZ Europe/Amsterdam
 # Do an initial clean up and general upgrade of the distribution
 ENV DEBIAN_FRONTEND noninteractive
 
-RUN apt clean && apt autoclean && apt update
+RUN apt clean && apt autoclean && apt update && apt -y upgrade
 
 # Install the packages we need
 RUN apt install -y curl \
