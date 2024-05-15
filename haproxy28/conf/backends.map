@@ -20,3 +20,4 @@ pdp.dev.openconext.local pdp_be
 aa.dev.openconext.local aa_be
 oidc-playground.dev.openconext.local oidcplayground_be 
 userlifecycle.dev.openconext.local userlifecycle_be 
+spdashboard.dev.openconext.local spdashboard_be
