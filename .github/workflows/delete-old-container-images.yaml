@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Delete all but the latest 7 versions
-        uses: actions/delete-package-versions@v4
+        uses: actions/delete-package-versions@v5
         with:
           package-name: 'openconext-basecontainers/php82-apache2'
           package-type: 'container'
@@ -23,7 +23,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Delete all but the latest 7 versions
-        uses: actions/delete-package-versions@v4
+        uses: actions/delete-package-versions@v5
         with:
           package-name: 'openconext-basecontainers/php72-apache2-node14-composer2'
           package-type: 'container'
@@ -36,7 +36,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Delete all but the latest 7 versions
-        uses: actions/delete-package-versions@v4
+        uses: actions/delete-package-versions@v5
         with:
           package-name: 'openconext-basecontainers/php82-apache2-node14-composer2'
           package-type: 'container'
@@ -49,7 +49,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Delete all but the latest 7 versions
-        uses: actions/delete-package-versions@v4
+        uses: actions/delete-package-versions@v5
         with:
           package-name: 'openconext-basecontainers/php72-apache2-node16-composer2'
           package-type: 'container'
@@ -62,7 +62,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Delete all but the latest 7 versions
-        uses: actions/delete-package-versions@v4
+        uses: actions/delete-package-versions@v5
         with:
           package-name: 'openconext-basecontainers/php82-apache2-node16-composer2'
           package-type: 'container'
@@ -75,7 +75,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Delete all but the latest 7 versions
-        uses: actions/delete-package-versions@v4
+        uses: actions/delete-package-versions@v5
         with:
           package-name: 'openconext-basecontainers/php80-apache2-node14-composer2'
           package-type: 'container'
@@ -88,7 +88,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Delete all but the latest 7 versions
-        uses: actions/delete-package-versions@v4
+        uses: actions/delete-package-versions@v5
         with:
           package-name: 'openconext-basecontainers/php80-apache2'
           package-type: 'container'
@@ -101,7 +101,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Delete all but the latest 7 versions
-        uses: actions/delete-package-versions@v4
+        uses: actions/delete-package-versions@v5
         with:
           package-name: 'openconext-basecontainers/php72-apache2'
           package-type: 'container'
@@ -114,7 +114,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Delete all but the latest 7 versions
-        uses: actions/delete-package-versions@v4
+        uses: actions/delete-package-versions@v5
         with:
           package-name: 'openconext-basecontainers/haproxy26'
           package-type: 'container'
@@ -127,7 +127,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Delete all but the latest 7 versions
-        uses: actions/delete-package-versions@v4
+        uses: actions/delete-package-versions@v5
         with:
           package-name: 'openconext-basecontainers/apache2'
           package-type: 'container'
@@ -140,7 +140,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Delete all but the latest 7 versions
-        uses: actions/delete-package-versions@v4
+        uses: actions/delete-package-versions@v5
         with:
           package-name: 'openconext-basecontainers/apache2-shibboleth'
           package-type: 'container'
