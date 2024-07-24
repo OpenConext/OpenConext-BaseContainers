@@ -57,19 +57,6 @@ jobs:
           min-versions-to-keep: 7
           delete-only-untagged-versions: 'false'
           ignore-versions: '/latest/g'
-  clean-php82-apache2-node16-composer2:
-    name: Delete old unused container images from php82-apache2-node16-composer2
-    runs-on: ubuntu-latest
-    steps:
-      - name: Delete all but the latest 7 versions
-        uses: actions/delete-package-versions@v5
-        with:
-          package-name: 'openconext-basecontainers/php82-apache2-node16-composer2'
-          package-type: 'container'
-          token: ${{ secrets.GITHUB_TOKEN }}
-          min-versions-to-keep: 7
-          delete-only-untagged-versions: 'false'
-          ignore-versions: '/latest/g'
   clean-php80-apache2-node14-composer2:
     name: Delete old unused container images from php80-apache2-node14-composer2
     runs-on: ubuntu-latest
