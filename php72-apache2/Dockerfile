@@ -1,11 +1,13 @@
 FROM php:7.2-apache-buster
-
+#Some default environment variables. They can be overridden when starting the container
+ENV PHP_MEMORY_LIMIT=128M
+ENV TZ=Europe/Amsterdam
+ENV DEBIAN_FRONTEND=noninteractive
 # Copy the Composer PHAR from the Composer image into the PHP image
 COPY --from=composer:1.9.3 /usr/bin/composer /usr/bin/composer
 RUN chmod +x /usr/bin/composer
 
 # Do an initial clean up and general upgrade of the distribution
-ENV DEBIAN_FRONTEND noninteractive
 RUN apt clean && apt autoclean && apt update
 RUN apt -y upgrade && apt -y dist-upgrade
 
@@ -31,14 +33,15 @@ RUN docker-php-ext-install soap \
 RUN pecl install -f apcu && \
   pecl install -f apcu_bc
 
-COPY ./conf/apcu.ini /usr/local/etc/php/conf.d/000-docker-php-apcu.ini
-COPY ./conf/apc.ini /usr/local/etc/php/conf.d/docker-php-apc.ini
+# Enable the Apache2 modules we need
+RUN a2enmod rewrite headers expires proxy_fcgi remoteip
+
+# Copy the openconext specific config 
+COPY ./conf/openconext.conf  ./conf/security.conf  /etc/apache2/conf-enabled/
+COPY ./conf/php.ini ./conf/php-cli.ini /conf/apcu.ini /conf/apc.ini  /usr/local/etc/php/
 
 # Clean up
 RUN apt autoremove -y && apt clean && apt autoclean && rm -rf /var/lib/apt/lists/*
-
-# Enable the Apache2 modules we need
-RUN a2enmod rewrite headers expires proxy_fcgi
 
 # Copy the startup script
 COPY ./bin/entrypoint.sh /entrypoint.sh
