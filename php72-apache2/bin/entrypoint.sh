@@ -32,12 +32,20 @@ fi
 if [[ -f "/var/www/html/bin/console" ]]; then
 	php /var/www/html/bin/console cache:clear -e ${APP_ENV:-prod}
 fi
+# Clear the PHP cache for older symfony apps
+if [[ -f "/var/www/html/app/console" ]]; then
+	php /var/www/html/app/console cache:clear -e ${APP_ENV:-prod}
+fi
 
 # Create a list of directories to be chowned
-apache_dirs=("$APACHE_RUN_DIR" $APACHE_LOG_DIR)
+apache_dirs=("$APACHE_RUN_DIR" "$APACHE_LOG_DIR")
 if [[ -d "/var/www/html/var/cache" ]]; then
 	apache_dirs+=("/var/www/html/var/cache" "/var/www/html/var/log")
 	mkdir -p /var/www/html/var/log/
+fi
+if [[ -d "/var/www/html/app/cache" ]]; then
+	apache_dirs+=("/var/www/html/app/cache" "/var/www/html/app/logs")
+	mkdir -p /var/www/html/app/logs/
 fi
 
 for dir in "${apache_dirs[@]}"; do
