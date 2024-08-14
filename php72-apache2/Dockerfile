@@ -30,17 +30,16 @@ RUN docker-php-ext-install soap \
   gmp
 
 # Use pecl to install acpu
-# TODO: ugly fix to put init file in correct dir.  Need to fiugure out what the real problem is.
 RUN pecl install -f apcu && \
-  pecl install -f apcu_bc && \
-  mv  /usr/local/etc/php/apcu.ini /usr/local/etc/php/conf.d/
+  pecl install -f apcu_bc
+COPY ./conf/apcu.ini ./conf/apc.ini  /usr/local/etc/php/conf.d/
 
 # Enable the Apache2 modules we need
 RUN a2enmod rewrite headers expires proxy_fcgi remoteip
 
-# Copy the openconext specific config 
+# Copy the openconext specific config
 COPY ./conf/openconext.conf  ./conf/security.conf  /etc/apache2/conf-enabled/
-COPY ./conf/php.ini ./conf/php-cli.ini /conf/apcu.ini /conf/apc.ini  /usr/local/etc/php/
+COPY ./conf/php.ini ./conf/php-cli.ini /usr/local/etc/php/
 
 # Clean up
 RUN apt autoremove -y && apt clean && apt autoclean && rm -rf /var/lib/apt/lists/*
