@@ -32,7 +32,8 @@ RUN docker-php-ext-install soap \
 # Use pecl to install acpu
 RUN pecl install -f apcu && \
   pecl install -f apcu_bc
-COPY ./conf/apcu.ini ./conf/apc.ini  /usr/local/etc/php/conf.d/
+COPY ./conf/apcu.ini /usr/local/etc/php/conf.d/91-apcu.ini
+COPY ./conf/apc.ini  /usr/local/etc/php/conf.d/92-acp.ini
 
 # Enable the Apache2 modules we need
 RUN a2enmod rewrite headers expires proxy_fcgi remoteip
