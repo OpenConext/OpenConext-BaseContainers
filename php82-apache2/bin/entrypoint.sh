@@ -33,11 +33,15 @@ if [[ -f "/var/www/html/bin/console" ]]; then
 	php /var/www/html/bin/console cache:clear -e ${APP_ENV:-prod}
 fi
 
-# Make sure the directories Apache2 needs are owned by the user running the daemon
+# Create a list of directories to be chowned
+apache_dirs=("$APACHE_RUN_DIR" "$APACHE_LOG_DIR")
 if [[ -d "/var/www/html/var/cache" ]]; then
-	apache_dirs=("$APACHE_RUN_DIR" "$APACHE_LOG_DIR" "/var/www/html/var/cache")
-else
-	apache_dirs=("$APACHE_RUN_DIR" "$APACHE_LOG_DIR")
+	apache_dirs+=("/var/www/html/var/cache" "/var/www/html/var/log")
+	mkdir -p /var/www/html/var/log/
+fi
+if [[ -d "/var/www/html/app/cache" ]]; then
+	apache_dirs+=("/var/www/html/app/cache" "/var/www/html/app/logs")
+	mkdir -p /var/www/html/app/logs/
 fi
 
 for dir in "${apache_dirs[@]}"; do
