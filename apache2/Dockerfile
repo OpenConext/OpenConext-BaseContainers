@@ -1,6 +1,6 @@
 FROM debian:bookworm-slim
 
-# Update and install packages needed 
+# Update and install packages needed
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt update && \
   apt -y upgrade && \
@@ -18,16 +18,20 @@ RUN apt autoremove -y && \
 COPY ./conf/security.conf ./conf/openconext.conf /etc/apache2/conf-available/
 COPY ./conf/default-vhost.conf /etc/apache2/sites-available/000-default.conf
 
-# Enable the apache2 modules we need
-RUN a2enmod authz_groupfile \
-  xml2enc \
-  headers \
-  ssl \
-  proxy \
-  proxy_connect \
-  proxy_http \
-  rewrite \
-  remoteip && \
+# Enable the apache2 modules we need and disable the one we don't want.
+RUN \
+  a2dismod  \
+    status && \
+  a2enmod \
+    authz_groupfile \
+    headers \
+    proxy \
+    proxy_connect \
+    proxy_http \
+    rewrite \
+    remoteip \
+    ssl \
+    xml2enc && \
   a2enconf openconext
 
 # Copy the startup script
