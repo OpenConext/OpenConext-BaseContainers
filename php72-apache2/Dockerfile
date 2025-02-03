@@ -12,13 +12,17 @@ RUN apt clean && apt autoclean && apt update
 RUN apt -y upgrade && apt -y dist-upgrade
 
 # Install the packages we need
-RUN apt install -y curl \
+RUN apt install -y \
+  gcc-7 \
+  curl \
   libxml2 \
   libxml2-dev \
   libfreetype6-dev \
   libjpeg62-turbo-dev \
   libpng-dev \
   libgmp3-dev
+
+ENV CC=gcc-7
 
 # Install the PHP 7.2 extensions we need
 RUN docker-php-ext-install soap \
