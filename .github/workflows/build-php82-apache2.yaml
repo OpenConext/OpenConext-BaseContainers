@@ -8,6 +8,7 @@ on:
       - php82-apache2/**
   schedule:
     - cron: '30 7 * * *'
+  workflow_dispatch:
 
 jobs:
   build-push-php82:

@@ -8,6 +8,7 @@ on:
       - php72-apache2-node14-composer2/**
   schedule:
     - cron: '0 7 * * *'
+  workflow_dispatch:
 
 jobs:
   build-push-php72:

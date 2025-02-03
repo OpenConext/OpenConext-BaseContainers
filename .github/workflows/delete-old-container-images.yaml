@@ -3,6 +3,7 @@ name: Delete old container images
 on:
   schedule:
     - cron: '0 1 * * *'
+  workflow_dispatch:
 
 jobs:
   clean-php82-apache2:

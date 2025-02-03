@@ -4,10 +4,9 @@ on:
   push:
     branches:
       - "main"
-  workflow_dispatch:
-    
   schedule:
     - cron: '30 7 * * *'
+  workflow_dispatch:
 
 jobs:
   build-push-haproxy28:
