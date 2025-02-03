@@ -10,8 +10,12 @@ ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt clean && apt autoclean && apt update && apt -y upgrade
 
+ENV CC=gcc-9
+
 # Install the packages we need
-RUN apt install -y curl \
+RUN apt install -y \
+  curl \
+  gcc-9 \
   libpng16-16 \
   libjpeg62-turbo \
   libfreetype6 \
@@ -38,7 +42,7 @@ RUN apt install -y curl \
 
 # Enable the Apache2 modules we need
 RUN a2enmod rewrite headers expires proxy_fcgi remoteip
-# Copy the openconext specific config 
+# Copy the openconext specific config
 COPY ./conf/openconext.conf  ./conf/security.conf  /etc/apache2/conf-enabled/
 COPY ./conf/php.ini ./conf/php-cli.ini /usr/local/etc/php/
 # Copy the startup script
