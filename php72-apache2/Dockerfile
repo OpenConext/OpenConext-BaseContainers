@@ -13,7 +13,7 @@ RUN apt -y upgrade && apt -y dist-upgrade
 
 # Install the packages we need
 RUN apt install -y \
-  gcc-7 \
+  clang \
   curl \
   libxml2 \
   libxml2-dev \
@@ -22,7 +22,7 @@ RUN apt install -y \
   libpng-dev \
   libgmp3-dev
 
-ENV CC=gcc-7
+ENV C clang
 
 # Install the PHP 7.2 extensions we need
 RUN docker-php-ext-install soap \

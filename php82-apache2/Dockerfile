@@ -10,12 +10,12 @@ ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt clean && apt autoclean && apt update && apt -y upgrade
 
-ENV CC=gcc-9
+ENV CC clang
 
 # Install the packages we need
 RUN apt install -y \
   curl \
-  gcc-9 \
+  clang \
   libpng16-16 \
   libjpeg62-turbo \
   libfreetype6 \
