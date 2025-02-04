@@ -40,8 +40,9 @@ RUN apt install -y \
   apt autoclean && \
   rm -rf /var/lib/apt/lists/*
 
-# Enable the Apache2 modules we need
-RUN a2enmod rewrite headers expires proxy_fcgi remoteip
+# Enable the Apache2 modules we need and disable the ones we don't need
+RUN a2enmod rewrite headers expires proxy_fcgi remoteip && \
+    a2dismod status
 # Copy the openconext specific config
 COPY ./conf/openconext.conf  ./conf/security.conf  /etc/apache2/conf-enabled/
 COPY ./conf/php.ini ./conf/php-cli.ini /usr/local/etc/php/
