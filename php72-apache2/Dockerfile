@@ -40,7 +40,8 @@ COPY ./conf/apcu.ini /usr/local/etc/php/conf.d/91-apcu.ini
 COPY ./conf/apc.ini  /usr/local/etc/php/conf.d/92-acp.ini
 
 # Enable the Apache2 modules we need
-RUN a2enmod rewrite headers expires proxy_fcgi remoteip
+RUN a2enmod rewrite headers expires proxy_fcgi remoteip && \
+    a2dismod status
 
 # Copy the openconext specific config
 COPY ./conf/openconext.conf  ./conf/security.conf  /etc/apache2/conf-enabled/
