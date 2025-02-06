@@ -24,7 +24,7 @@ RUN \
     libicu-dev \
     libfreetype6-dev \
     libjpeg62-turbo-dev \
-    libpng-dev \
+    libpng-dev
 
 RUN export CC=gcc-9 && docker-php-ext-configure gd --with-freetype --with-jpeg && docker-php-ext-install gd
 RUN echo "CC=$CC" && docker-php-ext-install gmp
