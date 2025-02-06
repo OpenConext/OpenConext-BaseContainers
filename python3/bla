@@ -1,0 +1,3 @@
+#!/bin/sh
+echo "hoi"
+exit 0
