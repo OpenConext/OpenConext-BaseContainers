@@ -5,7 +5,8 @@ on:
     branches:
       - main
     paths:
-      - php82-apache2-node20-composer2/**
+      - "php82-apache2-node20-composer2/**"
+      - ".github/workflows/build-php82-apache2-node20-composer2.yaml"
   schedule:
     - cron: '0 7 * * *'
   workflow_dispatch:

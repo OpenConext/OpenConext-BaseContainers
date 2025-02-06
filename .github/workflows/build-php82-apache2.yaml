@@ -5,7 +5,8 @@ on:
     branches:
       - main
     paths:
-      - php82-apache2/**
+      - "php82-apache2/**"
+      - ".github/workflows/build-php82-apache2.yaml"
   schedule:
     - cron: '30 7 * * *'
   workflow_dispatch:

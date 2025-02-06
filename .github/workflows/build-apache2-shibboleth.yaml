@@ -5,7 +5,8 @@ on:
     branches:
       - main
     paths:
-      - apache2-shibboleth/**
+      - "apache2-shibboleth/**"
+      - ".github/workflows/build-apache2-shibboleth.yaml"
   schedule:
     - cron: '0 7 * * *'
   workflow_dispatch:
