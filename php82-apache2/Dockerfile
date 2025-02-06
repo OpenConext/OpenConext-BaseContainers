@@ -24,18 +24,17 @@ RUN \
     libicu-dev \
     libfreetype6-dev \
     libjpeg62-turbo-dev \
-    libpng-dev && \
-  docker-php-ext-configure \
-    gd --with-freetype --with-jpeg && \
-  docker-php-ext-install -j$(nproc) \
-    gmp \
-    pdo_mysql \
-    gd \
-    intl \
-    && \
+    libpng-dev \
+
+RUN export CC=gcc-9 && docker-php-ext-configure gd --with-freetype --with-jpeg && docker-php-ext-install gd
+RUN echo "CC=$CC" && docker-php-ext-install gmp
+RUN docker-php-ext-install pdo_mysql
+RUN docker-php-ext-install intl
+
   # opcache is a special case, it needs to be compiled with clang (or gcc will segfault)
-  env CC=gcc-9 docker-php-ext-install -j$(nproc) opcache && \
-  apt -y remove \
+RUN env CC=gcc-9 docker-php-ext-install opcache
+
+RUN apt -y remove \
     gcc-9 \
     libgmp-dev \
     libicu-dev \
