@@ -13,6 +13,7 @@ RUN apt -y upgrade && apt -y dist-upgrade
 
 # Install the packages we need
 RUN apt install -y \
+  clang-11 \
   curl \
   libxml2 \
   libxml2-dev \
@@ -23,14 +24,16 @@ RUN apt install -y \
 
 
 # Install the PHP 7.2 extensions we need
-RUN docker-php-ext-install -j$(nproc) \
-  soap \
-  gd \
-  mysqli \
-  pdo_mysql \
-  opcache \
-  intl \
-  gmp
+RUN \
+  export CC=clang && \
+  docker-php-ext-install -j$(nproc) \
+    soap \
+    gd \
+    mysqli \
+    pdo_mysql \
+    opcache \
+    intl \
+    gmp
 
 # Use pecl to install acpu
 RUN \
