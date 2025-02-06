@@ -12,7 +12,7 @@ on:
 
 jobs:
   build-push-php72:
-    runs-on: ubuntu-latest
+    runs-on: "ubuntu-22.04"
     permissions:
       packages: write
     steps:
@@ -44,3 +44,8 @@ jobs:
             ghcr.io/openconext/openconext-basecontainers/php72-apache2:${{ github.sha }}
           cache-from: type=gha
           cache-to: type=gha
+
+      # Setup tmate session
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+        if: failure()

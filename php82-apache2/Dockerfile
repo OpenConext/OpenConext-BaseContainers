@@ -27,13 +27,13 @@ RUN \
     libjpeg62-turbo-dev \
     libpng-dev
 
-RUN export CC=clang-16 && docker-php-ext-configure gd --with-freetype --with-jpeg && docker-php-ext-install gd
-RUN echo "CC=$CC" && docker-php-ext-install gmp
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg && docker-php-ext-install gd
+RUN docker-php-ext-install gmp
 RUN docker-php-ext-install pdo_mysql
-RUN export CC=clang-16 && docker-php-ext-install intl
+RUN docker-php-ext-install intl
 
   # opcache is a special case, it needs to be compiled with clang (or gcc will segfault)
-RUN env CC=gcc-9 docker-php-ext-install opcache
+RUN docker-php-ext-install opcache
 
 RUN apt-get -y remove \
     gcc-9 \
