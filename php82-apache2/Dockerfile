@@ -13,9 +13,10 @@ ENV DEBIAN_FRONTEND=noninteractive
 # Install the packages we need
 # do some compiler magic, because some packages fail to compile with gcc, others fail with clang
 RUN \
-  apt update && \
-  apt install -y \
-    gcc-9 \
+  apt-get update && \
+  apt-get install -y \
+    gcc-9 gcc-10 \
+    clang-9 clang-11 clang-13 clang-16 \
     curl \
     libpng16-16 \
     libjpeg62-turbo \
@@ -26,7 +27,7 @@ RUN \
     libjpeg62-turbo-dev \
     libpng-dev
 
-RUN export CC=gcc-9 && docker-php-ext-configure gd --with-freetype --with-jpeg && docker-php-ext-install gd
+RUN export CC=clang-16 && docker-php-ext-configure gd --with-freetype --with-jpeg && docker-php-ext-install gd
 RUN echo "CC=$CC" && docker-php-ext-install gmp
 RUN docker-php-ext-install pdo_mysql
 RUN docker-php-ext-install intl
@@ -34,14 +35,14 @@ RUN docker-php-ext-install intl
   # opcache is a special case, it needs to be compiled with clang (or gcc will segfault)
 RUN env CC=gcc-9 docker-php-ext-install opcache
 
-RUN apt -y remove \
+RUN apt-get -y remove \
     gcc-9 \
     libgmp-dev \
     libicu-dev \
     libfreetype6-dev \
     libjpeg62-turbo-dev \
     libpng-dev && \
-  apt autoremove --purge -y && \
+  apt-get autoremove --purge -y && \
   rm -rf /var/lib/apt/lists/* /var/cache/apt
 
 # Enable the Apache2 modules we need and disable the ones we don't need
