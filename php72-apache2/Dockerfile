@@ -36,12 +36,11 @@ RUN env CC=clang-11 docker-php-ext-install -j$(nproc) intl
 RUN env CC=clang-11 docker-php-ext-install -j$(nproc) gd
 
 
-RUN apt -y purge clang-11 libxml2-dev libfreetype6-dev libjpeg62-turbo-dev libpng-dev libgmp3-dev
+RUN apt-get -y purge clang-11 libxml2-dev libfreetype6-dev libjpeg62-turbo-dev libpng-dev libgmp3-dev
 
 # Use pecl to install acpu
-RUN \
-  pecl install -f apcu && \
-  pecl install -f apcu_bc
+RUN pecl install -f apcu
+RUN env CC=CLANG-11 pecl install -f apcu_bc
 COPY ./conf/apcu.ini /usr/local/etc/php/conf.d/91-apcu.ini
 COPY ./conf/apc.ini  /usr/local/etc/php/conf.d/92-acp.ini
 
