@@ -3,8 +3,6 @@ name: Build the PHP 8.2 Apache2 Node20 Composer2 container
 
 on:
   push:
-    branches:
-      - main
     paths:
       - "php82-apache2-node20-composer2/**"
       - ".github/workflows/build-php82-apache2-node20-composer2.yaml"
@@ -39,7 +37,8 @@ jobs:
         with:
           context: ./php82-apache2-node20-composer2
           platforms: linux/amd64,linux/arm64
-          push: true
+          # only push the latest tag on the main branch
+          push: "${{ github.ref == 'refs/heads/main' }}"
           tags: |
             ghcr.io/openconext/openconext-basecontainers/php82-apache2-node20-composer2:latest
             ghcr.io/openconext/openconext-basecontainers/php82-apache2-node20-composer2:${{ github.sha }}

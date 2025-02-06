@@ -3,8 +3,6 @@ name: Build the PHP 7.2 Apache2 Node14 Composer2 container
 
 on:
   push:
-    branches:
-      - main
     paths:
       - "php72-apache2-node14-composer2/**"
       - ".github/workflows/build-php72-apache2-node14-composer2.yaml"
@@ -39,7 +37,8 @@ jobs:
         with:
           context: ./php72-apache2-node14-composer2
           platforms: linux/amd64,linux/arm64
-          push: true
+          # only push the latest tag on the main branch
+          push: "${{ github.ref == 'refs/heads/main' }}"
           tags: |
             ghcr.io/openconext/openconext-basecontainers/php72-apache2-node14-composer2:latest
             ghcr.io/openconext/openconext-basecontainers/php72-apache2-node14-composer2:${{ github.sha }}

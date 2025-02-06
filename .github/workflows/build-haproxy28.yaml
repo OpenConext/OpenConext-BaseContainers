@@ -3,8 +3,6 @@ name: Build the Haproxy container
 
 on:
   push:
-    branches:
-      - "main"
     paths:
       - "haproxy28/**"
       - ".github/workflows/build-haproxy28.yaml"
@@ -51,7 +49,8 @@ jobs:
         with:
           context: ./haproxy28
           platforms: linux/amd64,linux/arm64
-          push: true
+          # only push the latest tag on the main branch
+          push: "${{ github.ref == 'refs/heads/main' }}"
           tags: |
             ghcr.io/openconext/openconext-basecontainers/haproxy28:latest
             ghcr.io/openconext/openconext-basecontainers/haproxy28:${{ github.sha }}

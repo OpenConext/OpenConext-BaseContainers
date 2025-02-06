@@ -3,8 +3,6 @@ name: Build the Apache2 container
 
 on:
   push:
-    branches:
-      - main
     paths:
       - apache2/**
   schedule:
@@ -39,7 +37,8 @@ jobs:
         with:
           context: ./apache2
           platforms: linux/amd64,linux/arm64
-          push: true
+          # only push the latest tag on the main branch
+          push: "${{ github.ref == 'refs/heads/main' }}"
           tags: |
             ghcr.io/openconext/openconext-basecontainers/apache2:latest
             ghcr.io/openconext/openconext-basecontainers/apache2:${{ github.sha }}

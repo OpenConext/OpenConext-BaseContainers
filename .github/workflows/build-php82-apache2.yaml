@@ -3,9 +3,6 @@ name: Build the PHP 8.2 Apache2 container
 
 on:
   push:
-    branches:
-      - main
-      - arm64
     paths:
       - "php82-apache2/**"
       - ".github/workflows/build-php82-apache2.yaml"
@@ -40,7 +37,8 @@ jobs:
         with:
           context: ./php82-apache2
           platforms: linux/amd64,linux/arm64
-          push: true
+          # only push the latest tag on the main branch
+          push: "${{ github.ref == 'refs/heads/main' }}"
           tags: |
             ghcr.io/openconext/openconext-basecontainers/php82-apache2:latest
             ghcr.io/openconext/openconext-basecontainers/php82-apache2:${{ github.sha }}
