@@ -1,11 +1,13 @@
-FROM debian:bookworm-slim
+FROM docker.io/library/debian:bookworm-slim
 
 # Update and install packages needed
-ENV DEBIAN_FRONTEND noninteractive
+ENV DEBIAN_FRONTEND=noninteractive
 RUN apt update && \
   apt -y upgrade && \
-  apt -y install -y apache2 \
-  curl
+  apt -y install -y  \
+    apache2 \
+    curl \
+    xz-utils
 
 # Clean up
 RUN apt autoremove -y && \
