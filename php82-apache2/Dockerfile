@@ -14,7 +14,7 @@ RUN apt clean && apt autoclean && apt update && apt -y upgrade
 # do some compiler magic, because some packages fail to compile with gcc, others fail with clang
 RUN \
   apt install -y \
-    gcc-11 \
+    gcc-9 \
     curl \
     libpng16-16 \
     libjpeg62-turbo \
@@ -33,7 +33,7 @@ RUN \
     intl \
     && \
   # opcache is a special case, it needs to be compiled with clang (or gcc will segfault)
-  env CC=gcc-11 docker-php-ext-install -j$(nproc) opcache && \
+  env CC=gcc-9 docker-php-ext-install -j$(nproc) opcache && \
   apt -y remove \
     gcc-11 \
     libgmp-dev \
