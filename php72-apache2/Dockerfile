@@ -25,15 +25,15 @@ RUN apt install -y \
 
 # Install the PHP 7.2 extensions we need
 RUN \
-  export CC=clang-11 && \
   docker-php-ext-install -j$(nproc) \
     soap \
-    gd \
     mysqli \
     pdo_mysql \
     opcache \
     intl \
-    gmp
+    gmp  \
+    && \
+  env CC=clang-11 && docker-php-ext-install -j$(nproc) gd
 
 # Use pecl to install acpu
 RUN \
