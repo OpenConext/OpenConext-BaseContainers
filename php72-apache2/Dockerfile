@@ -23,7 +23,8 @@ RUN apt install -y \
 
 
 # Install the PHP 7.2 extensions we need
-RUN docker-php-ext-install soap \
+RUN docker-php-ext-install -j$(nproc) \
+  soap \
   gd \
   mysqli \
   pdo_mysql \
@@ -32,7 +33,8 @@ RUN docker-php-ext-install soap \
   gmp
 
 # Use pecl to install acpu
-RUN pecl install -f apcu && \
+RUN \
+  pecl install -f apcu && \
   pecl install -f apcu_bc
 COPY ./conf/apcu.ini /usr/local/etc/php/conf.d/91-apcu.ini
 COPY ./conf/apc.ini  /usr/local/etc/php/conf.d/92-acp.ini

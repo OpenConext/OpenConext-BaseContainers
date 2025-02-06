@@ -1,7 +1,7 @@
 FROM ghcr.io/openconext/openconext-basecontainers/apache2:latest
 
 # Set things up for Apt
-ENV DEBIAN_FRONTEND noninteractive
+ENV DEBIAN_FRONTEND=noninteractive
 RUN apt clean && apt autoclean && apt update
 
 # Install the Shibboleth daemon and Apache2 modules
@@ -11,8 +11,8 @@ RUN apt install -y shibboleth-sp-common \
   gettext
 
 # Clean up
-RUN apt autoremove -y && \ 
-  apt clean && \ 
+RUN apt autoremove -y && \
+  apt clean && \
   apt autoclean && \
   rm -rf /var/lib/apt/lists/* && \
   a2enmod shib && \

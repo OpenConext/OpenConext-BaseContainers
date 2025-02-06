@@ -1,3 +1,4 @@
+---
 name: Build the PHP 7.2 Apache2 container
 
 on:
