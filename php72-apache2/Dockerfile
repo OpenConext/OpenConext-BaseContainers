@@ -30,10 +30,14 @@ RUN \
     mysqli \
     pdo_mysql \
     opcache \
-    intl \
     gmp  \
     && \
-  env CC=clang-11 && docker-php-ext-install -j$(nproc) gd
+  env CC=clang-11 docker-php-ext-install -j$(nproc) intl && \
+  env CC=clang-11 docker-php-ext-install -j$(nproc) gd
+
+
+RUN \
+   apt -y purge clang-11 libxml2-dev libfreetype6-dev libjpeg62-turbo-dev libpng-dev libgmp3-dev
 
 # Use pecl to install acpu
 RUN \
