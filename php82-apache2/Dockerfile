@@ -8,11 +8,12 @@ ENV TZ=Europe/Amsterdam
 # Do an initial clean up and general upgrade of the distribution
 ENV DEBIAN_FRONTEND=noninteractive
 
-RUN apt clean && apt autoclean && apt update && apt -y upgrade
+#RUN apt clean && apt autoclean && apt update && apt -y upgrade
 
 # Install the packages we need
 # do some compiler magic, because some packages fail to compile with gcc, others fail with clang
 RUN \
+  apt update && \
   apt install -y \
     gcc-9 \
     curl \
@@ -35,7 +36,7 @@ RUN \
   # opcache is a special case, it needs to be compiled with clang (or gcc will segfault)
   env CC=gcc-9 docker-php-ext-install -j$(nproc) opcache && \
   apt -y remove \
-    gcc-11 \
+    gcc-9 \
     libgmp-dev \
     libicu-dev \
     libfreetype6-dev \

@@ -8,36 +8,35 @@ COPY --from=composer:1.9.3 /usr/bin/composer /usr/bin/composer
 RUN chmod +x /usr/bin/composer
 
 # Do an initial clean up and general upgrade of the distribution
-RUN apt clean && apt autoclean && apt update
-RUN apt -y upgrade && apt -y dist-upgrade
+#RUN apt clean && apt autoclean && apt update
+#RUN apt -y upgrade && apt -y dist-upgrade
 
 # Install the packages we need
-RUN apt install -y \
-  clang-11 \
-  curl \
-  libxml2 \
-  libxml2-dev \
-  libfreetype6-dev \
-  libjpeg62-turbo-dev \
-  libpng-dev \
-  libgmp3-dev
+RUN \
+  apt-get update && \
+  apt-get install -y \
+    clang-11 \
+    curl \
+    libxml2 \
+    libxml2-dev \
+    libfreetype6-dev \
+    libjpeg62-turbo-dev \
+    libpng-dev \
+    libgmp3-dev
 
 
 # Install the PHP 7.2 extensions we need
-RUN \
-  docker-php-ext-install -j$(nproc) \
-    soap \
-    mysqli \
-    pdo_mysql \
-    opcache \
-    gmp  \
-    && \
-  env CC=clang-11 docker-php-ext-install -j$(nproc) intl && \
-  env CC=clang-11 docker-php-ext-install -j$(nproc) gd
+RUN docker-php-ext-install soap
+RUN docker-php-ext-install mysqli
+RUN docker-php-ext-install pdo_mysql
+RUN docker-php-ext-install opcache
+RUN docker-php-ext-install gmp
+
+RUN env CC=clang-11 docker-php-ext-install -j$(nproc) intl
+RUN env CC=clang-11 docker-php-ext-install -j$(nproc) gd
 
 
-RUN \
-   apt -y purge clang-11 libxml2-dev libfreetype6-dev libjpeg62-turbo-dev libpng-dev libgmp3-dev
+RUN apt -y purge clang-11 libxml2-dev libfreetype6-dev libjpeg62-turbo-dev libpng-dev libgmp3-dev
 
 # Use pecl to install acpu
 RUN \

@@ -36,7 +36,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: ./php72-apache2
-          platforms: linux/amd64,linux/arm64
+          platforms: "linux/arm64"
           # only push the latest tag on the main branch
           push: "${{ github.ref == 'refs/heads/main' }}"
           tags: |
