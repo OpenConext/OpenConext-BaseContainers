@@ -25,7 +25,7 @@ RUN apt install -y \
 
 # Install the PHP 7.2 extensions we need
 RUN \
-  export CC=clang && \
+  export CC=clang-11 && \
   docker-php-ext-install -j$(nproc) \
     soap \
     gd \

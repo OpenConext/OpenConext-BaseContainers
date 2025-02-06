@@ -33,7 +33,7 @@ RUN \
     intl \
     && \
   # opcache is a special case, it needs to be compiled with clang (or gcc will segfault)
-  env CC=clang docker-php-ext-install -j$(nproc) opcache  \
+  env CC=clang-16 docker-php-ext-install -j$(nproc) opcache  \
   apt -y remove \
     clang-16 \
     libgmp-dev \
