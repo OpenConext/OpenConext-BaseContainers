@@ -8,12 +8,13 @@ ENV TZ=Europe/Amsterdam
 # Do an initial clean up and general upgrade of the distribution
 ENV DEBIAN_FRONTEND=noninteractive
 
-RUN apt clean && apt autoclean && apt update && apt -y upgrade
+#RUN apt clean && apt autoclean && apt update && apt -y upgrade
 
 # Install the packages we need
 # do some compiler magic, because some packages fail to compile with gcc, others fail with clang
 RUN \
-  apt install -y \
+  apt-get update && \
+  apt-get install -y \
     curl \
     libpng16-16 \
     libjpeg62-turbo \
@@ -22,23 +23,23 @@ RUN \
     libicu-dev \
     libfreetype6-dev \
     libjpeg62-turbo-dev \
-    libpng-dev && \
-  docker-php-ext-configure \
-    gd --with-freetype --with-jpeg && \
-  docker-php-ext-install -j$(nproc) \
-    gmp \
-    opcache  \
-    pdo_mysql \
-    gd \
-    intl \
-    && \
-  apt -y remove \
+    libpng-dev
+
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg && docker-php-ext-install gd
+RUN docker-php-ext-install gmp
+RUN docker-php-ext-install pdo_mysql
+RUN docker-php-ext-install intl
+
+  # opcache is a special case, it needs to be compiled with clang (or gcc will segfault)
+RUN docker-php-ext-install opcache
+
+RUN apt-get -y remove \
     libgmp-dev \
     libicu-dev \
     libfreetype6-dev \
     libjpeg62-turbo-dev \
     libpng-dev && \
-  apt autoremove --purge -y && \
+  apt-get autoremove --purge -y && \
   rm -rf /var/lib/apt/lists/* /var/cache/apt
 
 # Enable the Apache2 modules we need and disable the ones we don't need
