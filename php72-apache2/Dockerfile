@@ -15,7 +15,6 @@ RUN chmod +x /usr/bin/composer
 RUN \
   apt-get update && \
   apt-get install -y \
-    clang-11 \
     curl \
     libxml2 \
     libxml2-dev \
@@ -23,7 +22,6 @@ RUN \
     libjpeg62-turbo-dev \
     libpng-dev \
     libgmp3-dev
-
 
 # Install the PHP 7.2 extensions we need
 RUN docker-php-ext-install soap
@@ -35,8 +33,8 @@ RUN docker-php-ext-install gmp
 RUN docker-php-ext-install -j$(nproc) intl
 RUN docker-php-ext-install -j$(nproc) gd
 
-
-RUN apt-get -y purge clang-11 libxml2-dev libfreetype6-dev libjpeg62-turbo-dev libpng-dev libgmp3-dev
+# clean up
+RUN apt-get -y purge libxml2-dev libfreetype6-dev libjpeg62-turbo-dev libpng-dev libgmp3-dev
 
 # Use pecl to install acpu
 RUN pecl install -f apcu

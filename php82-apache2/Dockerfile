@@ -15,8 +15,6 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN \
   apt-get update && \
   apt-get install -y \
-    gcc-9 gcc-10 \
-    clang-9 clang-11 clang-13 clang-16 \
     curl \
     libpng16-16 \
     libjpeg62-turbo \
@@ -36,7 +34,6 @@ RUN docker-php-ext-install intl
 RUN docker-php-ext-install opcache
 
 RUN apt-get -y remove \
-    gcc-9 \
     libgmp-dev \
     libicu-dev \
     libfreetype6-dev \
