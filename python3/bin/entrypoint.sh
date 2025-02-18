@@ -25,11 +25,14 @@ then
     if [ -n "$RUNAS_GID" ]
     then
         echo "Switching to user $RUNAS_UID and group $RUNAS_GID"
-        PRIVDROP="setpriv --reuid=$RUNAS_UID --regid=$RUNAS_GID --clear-groups"
+        groupadd -g $RUNAS_GID openconext
+        useradd -M -u $RUNAS_UID -g $RUNAS_GID openconext
+        PRIVDROP="setpriv --reuid=openconext --regid=openconext --reset-env --clear-groups"
     else
         echo "Switching to user $RUNAS_UID"
-        PRIVDROP="setpriv --reuid=$RUNAS_UID"
-    fi
+        useradd -M -u $RUNAS_UID openconext
+        PRIVDROP="setpriv --reuid=openconext --reset-env --clear-groups"
+fi
     echo "Dropping privileges to $($PRIVDROP id -u):$($PRIVDROP id -g)"
 
     # run custom scripts after dropping privileges
