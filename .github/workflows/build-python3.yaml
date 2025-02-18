@@ -39,7 +39,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
-          context: ./apache2
+          context: "./python3"
           platforms: "linux/amd64,linux/arm64"
           # only push the latest tag on the main branch
           push: "${{ github.ref == 'refs/heads/main' }}"
