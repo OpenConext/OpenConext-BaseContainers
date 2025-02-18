@@ -7,6 +7,7 @@ RUN \
     apt-get update                                    && \
     apt-get -y dist-upgrade                           && \
     apt-get -y install                                   \
+        build-essential                                  \
         bzip2                                            \
         curl                                             \
         default-libmysqlclient-dev                       \
@@ -17,7 +18,6 @@ RUN \
         util-linux                                       \
         xz-utils                                         \
         && \
-    apt-get -y autoclean                              && \
     apt-get -y autoremove                             && \
     rm -rf /var/lib/apt/lists/* /var/cache/apt/*
 
