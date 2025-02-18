@@ -27,11 +27,11 @@ then
         echo "Switching to user $RUNAS_UID and group $RUNAS_GID"
         groupadd -g $RUNAS_GID openconext
         useradd -M -u $RUNAS_UID -g $RUNAS_GID openconext
-        PRIVDROP="setpriv --reuid=openconext --regid=openconext --reset-env --clear-groups"
+        PRIVDROP="runuser --user=openconext --group=openconext -- "
     else
         echo "Switching to user $RUNAS_UID"
         useradd -M -u $RUNAS_UID openconext
-        PRIVDROP="setpriv --reuid=openconext --reset-env --clear-groups"
+        PRIVDROP="runuser --user=openconext -- "
 fi
     echo "Dropping privileges to $($PRIVDROP id -u):$($PRIVDROP id -g)"
 
