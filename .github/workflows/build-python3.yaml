@@ -1,0 +1,50 @@
+---
+name: Build the Python3 container
+
+on:
+  push:
+    paths:
+      - "python3/**"
+      - ".github/workflows/build-python3.yaml"
+  schedule:
+    - cron: '0 7 * * *'
+  workflow_dispatch:
+
+jobs:
+  build-push-python3:
+    runs-on: "ubuntu-22.04"
+    permissions:
+      packages: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+        with:
+          platforms: "linux/amd64,linux/arm64"
+          # The latest version will lead to segmentation fault.
+          image: "tonistiigi/binfmt:qemu-v7.0.0-28"
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: "./python3"
+          platforms: "linux/amd64,linux/arm64"
+          # only push the latest tag on the main branch
+          push: "${{ github.ref == 'refs/heads/main' }}"
+          tags: |
+            ghcr.io/openconext/openconext-basecontainers/python3:latest
+            ghcr.io/openconext/openconext-basecontainers/python3:${{ github.sha }}
+          cache-from: type=gha
+          cache-to: type=gha
