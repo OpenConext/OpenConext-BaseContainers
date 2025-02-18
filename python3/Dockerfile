@@ -26,7 +26,7 @@ ARG RUNAS_UID
 ARG RUNAS_GID
 
 # Copy the startup script
-RUN mkdir /container_init
+RUN mkdir /container-init /container-init-post
 COPY --chmod=0755 ./bin/entrypoint.sh /entrypoint.sh
 
 # Set the default workdir

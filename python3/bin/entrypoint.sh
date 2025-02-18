@@ -15,7 +15,7 @@ echo "Running custom scripts in /container-init"
 if [ -d "/container-init" ]
 then
     # run all scripts using run-parts
-    run-parts --verbose "/container-init"
+    run-parts --verbose --regex '.*' "/container-init"
 fi
 
 # set up privilege dropping to user and group
@@ -31,6 +31,20 @@ then
         PRIVDROP="setpriv --reuid=$RUNAS_UID"
     fi
     echo "Dropping privileges to $($PRIVDROP id -u):$($PRIVDROP id -g)"
+
+    # run custom scripts after dropping privileges
+    echo "Running custom scripts in /container-init-post as $RUNAS_UID"
+    if  [ -d "/container-init-post" ]
+    then
+        # run all scripts using run-parts
+        ${PRIVDROP} run-parts --verbose --regex '.*' "/container-init-post"
+    fi
+else
+    echo "Warning: not dropping privileges"
+    if [ -d "/container-init-post" ] && ! find /container-init-post/ -maxdepth 0 -empty
+    then
+        echo "Warning: not running scripts in /container-init-post as no user is specified"
+    fi
 fi
 
 # Hand off to the CMD
