@@ -11,7 +11,7 @@ then
 fi
 
 # run custom scripts before dropping privileges
-echo "Running custom scripts in /container-init"
+echo "Running custom scripts in /container-init as root"
 if [ -d "/container-init" ]
 then
     # run all scripts using run-parts

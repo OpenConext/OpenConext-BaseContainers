@@ -1,4 +1,3 @@
-# First build SRAM SBS image
 FROM docker.io/library/python:3.11-slim-bookworm
 
 # Do an initial clean up and general upgrade of the distribution
