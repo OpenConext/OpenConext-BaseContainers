@@ -2,7 +2,7 @@
 FROM docker.io/library/python:3.11-slim-bookworm
 
 # Do an initial clean up and general upgrade of the distribution
-ENV DEBIAN_FRONTEND noninteractive
+ENV DEBIAN_FRONTEND=noninteractive
 RUN \
     apt-get update                                    && \
     apt-get -y dist-upgrade                           && \
