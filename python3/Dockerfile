@@ -9,6 +9,7 @@ RUN \
         build-essential                                  \
         bzip2                                            \
         curl                                             \
+        clang                                            \
         default-libmysqlclient-dev                       \
         git                                              \
         libxmlsec1-dev                                   \
