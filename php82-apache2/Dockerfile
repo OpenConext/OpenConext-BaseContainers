@@ -30,16 +30,19 @@ RUN docker-php-ext-install gmp
 RUN docker-php-ext-install pdo_mysql
 RUN docker-php-ext-install intl
 
-  # opcache is a special case, it needs to be compiled with clang (or gcc will segfault)
 RUN docker-php-ext-install opcache
 
+# don't autoremove, becasue that will remove libraries needed for the custom-built php extensions
 RUN apt-get -y remove \
     libgmp-dev \
     libicu-dev \
     libfreetype6-dev \
     libjpeg62-turbo-dev \
-    libpng-dev && \
-  apt-get autoremove --purge -y && \
+    libpng-dev \
+    icu-devtools \
+    libicu-dev \
+    zlib1g-dev \
+ && \
   rm -rf /var/lib/apt/lists/* /var/cache/apt
 
 # Enable the Apache2 modules we need and disable the ones we don't need

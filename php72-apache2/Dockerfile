@@ -33,9 +33,6 @@ RUN docker-php-ext-install gmp
 RUN docker-php-ext-install -j$(nproc) intl
 RUN docker-php-ext-install -j$(nproc) gd
 
-# clean up
-RUN apt-get -y purge libxml2-dev libfreetype6-dev libjpeg62-turbo-dev libpng-dev libgmp3-dev
-
 # Use pecl to install acpu
 RUN pecl install -f apcu
 RUN pecl install -f apcu_bc
@@ -51,7 +48,20 @@ COPY ./conf/openconext.conf  ./conf/security.conf  /etc/apache2/conf-enabled/
 COPY ./conf/php.ini ./conf/php-cli.ini /usr/local/etc/php/
 
 # Clean up
-RUN apt autoremove -y && apt clean && apt autoclean && rm -rf /var/lib/apt/lists/*
+# don't autoremove, becasue that will remove libraries needed for the custom-built php extensions
+# clean up
+RUN apt-get -y purge \
+    libxml2-dev \
+    libfreetype6-dev \
+    libjpeg62-turbo-dev \
+    libpng-dev \
+    libgmp3-dev \
+    icu-devtools \
+    libicu-dev \
+    libgmp-dev \
+    zlib1g-dev \
+    && \
+    rm -rf /var/lib/apt/lists/* /var/cache/apt
 
 # Copy the startup script
 COPY ./bin/entrypoint.sh /entrypoint.sh
