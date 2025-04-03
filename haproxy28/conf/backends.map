@@ -12,6 +12,7 @@ engine.dev.openconext.local engine_be
 engine-api.dev.openconext.local engine_be
 profile.dev.openconext.local profile_be
 mujina-idp.dev.openconext.local mujina-idp_be
+mujina-sp.dev.openconext.local mujina-sp_be
 manage.dev.openconext.local manage_be
 connect.dev.openconext.local connect_be
 teams.dev.openconext.local teams_be
