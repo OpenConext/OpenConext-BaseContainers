@@ -49,8 +49,8 @@ jobs:
           platforms: "linux/${{ matrix.arch }}"
           tags: "ghcr.io/openconext/openconext-basecontainers/php82-apache2"
           outputs: "type=image,push-by-digest=true,name-canonical=true,push=true"
-          cache-from: type=gha
-          cache-to: type=gha
+          cache-from: type=gha,scope=buildkit-${{ matrix.arch }}
+          cache-to: type=gha,scope=buildkit-${{ matrix.arch }}
 
       - name: Export digest
         run: |
