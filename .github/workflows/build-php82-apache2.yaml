@@ -17,8 +17,9 @@ jobs:
   build-php82:
     permissions:
       packages: write
-    matrix:
-      arch: [ 'amd64', 'arm64' ]
+    strategy:
+      matrix:
+        arch: [ 'amd64', 'arm64' ]
     runs-on: |
       ubuntu-24.04${{ matrix.arch == 'arm64' && '-arm' || '' }}
     steps:
