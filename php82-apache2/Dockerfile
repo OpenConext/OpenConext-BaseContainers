@@ -37,7 +37,6 @@ RUN \
     libgmp-dev \
     libgmp3-dev \
     icu-devtools \
-    libicu-dev \
     zlib1g-dev \
   && \
   rm -rf /var/lib/apt/lists/* /var/cache/apt
