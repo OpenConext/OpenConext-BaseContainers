@@ -98,7 +98,7 @@ jobs:
         working-directory: "${{ runner.temp }}/digests/"
         run: |
           DIGESTS=$( printf 'ghcr.io/openconext/openconext-basecontainers/php82-apache2@sha256:%s ' * )
-          TAGS="-t latest -t ${{ github.sha }}"
+          TAGS="-t ghcr.io/openconext/openconext-basecontainers/php82-apache2:latest -t ghcr.io/openconext/openconext-basecontainers/php82-apache2:${{ github.sha }}"
 
           echo "Creating docker manifest list"
           echo "Digests: $DIGESTS"
