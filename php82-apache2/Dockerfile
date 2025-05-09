@@ -18,9 +18,9 @@ RUN \
     libgmp3-dev
 
 # Install the PHP 8.2 extensions we need
-RUN docker-php-ext-install pdo_mysql
-RUN docker-php-ext-install opcache
-RUN docker-php-ext-install gmp
+RUN docker-php-ext-install -j$(nproc) pdo_mysql
+RUN docker-php-ext-install -j$(nproc) opcache
+RUN docker-php-ext-install -j$(nproc) gmp
 
 RUN docker-php-ext-install -j$(nproc) intl
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg && docker-php-ext-install -j$(nproc) gd
