@@ -21,11 +21,12 @@ RUN \
     libgmp3-dev
 
 # Install the PHP 7.2 extensions we need
-RUN docker-php-ext-install soap
-RUN docker-php-ext-install mysqli
-RUN docker-php-ext-install pdo_mysql
-RUN docker-php-ext-install opcache
-RUN docker-php-ext-install gmp
+RUN docker-php-ext-install -j$(nproc) soap
+RUN docker-php-ext-install -j$(nproc) mysqli
+RUN docker-php-ext-install -j$(nproc) pdo_mysql
+RUN docker-php-ext-install -j$(nproc) opcache
+RUN docker-php-ext-install -j$(nproc) gmp
+RUN docker-php-ext-install -j$(nproc) gmp
 
 RUN docker-php-ext-install -j$(nproc) intl
 RUN docker-php-ext-install -j$(nproc) gd
