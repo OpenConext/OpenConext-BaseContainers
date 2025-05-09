@@ -7,10 +7,6 @@ ENV DEBIAN_FRONTEND=noninteractive
 COPY --from=composer:1.9.3 /usr/bin/composer /usr/bin/composer
 RUN chmod +x /usr/bin/composer
 
-# Do an initial clean up and general upgrade of the distribution
-#RUN apt clean && apt autoclean && apt update
-#RUN apt -y upgrade && apt -y dist-upgrade
-
 # Install the packages we need
 RUN \
   apt-get update && \
@@ -18,6 +14,7 @@ RUN \
     curl \
     libxml2 \
     libxml2-dev \
+    libicu-dev \
     libfreetype6-dev \
     libjpeg62-turbo-dev \
     libpng-dev \
@@ -39,29 +36,32 @@ RUN pecl install -f apcu_bc
 COPY ./conf/apcu.ini /usr/local/etc/php/conf.d/91-apcu.ini
 COPY ./conf/apc.ini  /usr/local/etc/php/conf.d/92-acp.ini
 
-# Enable the Apache2 modules we need
-RUN a2enmod rewrite headers expires proxy_fcgi remoteip && \
-    a2dismod status
+# Clean up
+# don't autoremove, becasue that will remove libraries needed for the custom-built php extensions
+RUN \
+  apt-get -y purge \
+    libxml2-dev \
+    libicu-dev \
+    libfreetype6-dev \
+    libjpeg62-turbo-dev \
+    libpng-dev \
+    libgmp-dev \
+    libgmp3-dev \
+    icu-devtools \
+    libicu-dev \
+    zlib1g-dev \
+  && \
+  rm -rf /var/lib/apt/lists/* /var/cache/apt
+
+# Enable the Apache2 modules we need and disable the ones we don't need
+RUN \
+  a2enmod rewrite headers expires proxy_fcgi remoteip \
+  && \
+  a2dismod status
 
 # Copy the openconext specific config
 COPY ./conf/openconext.conf  ./conf/security.conf  /etc/apache2/conf-enabled/
 COPY ./conf/php.ini ./conf/php-cli.ini /usr/local/etc/php/
-
-# Clean up
-# don't autoremove, becasue that will remove libraries needed for the custom-built php extensions
-# clean up
-RUN apt-get -y purge \
-    libxml2-dev \
-    libfreetype6-dev \
-    libjpeg62-turbo-dev \
-    libpng-dev \
-    libgmp3-dev \
-    icu-devtools \
-    libicu-dev \
-    libgmp-dev \
-    zlib1g-dev \
-    && \
-    rm -rf /var/lib/apt/lists/* /var/cache/apt
 
 # Copy the startup script
 COPY ./bin/entrypoint.sh /entrypoint.sh
