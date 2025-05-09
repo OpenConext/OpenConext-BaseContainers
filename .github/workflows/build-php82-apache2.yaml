@@ -13,6 +13,12 @@ on:
 env:
   NAME: "php82-apache2"
 
+# Beware of magick below!
+# The matrix strategy is used to create a job for each architecture
+# The individual images are pushed by digest to the package registry
+# The separate architectures are merged into a single image
+# see https://docs.docker.com/build/ci/github-actions/multi-platform/#distribute-build-across-multiple-runners
+
 jobs:
   build-php82:
     permissions:
@@ -66,8 +72,7 @@ jobs:
     name: Merge images
     if: >
       github.actor!='dependabot[bot]' &&
-      github.event_name!='pull_request' &&
-      github.ref == 'refs/heads/main'
+      github.event_name!='pull_request'
     needs:
       - "build-php82"
     runs-on: "ubuntu-24.04"
