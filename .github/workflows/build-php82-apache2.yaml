@@ -72,7 +72,8 @@ jobs:
     name: Merge images
     if: >
       github.actor!='dependabot[bot]' &&
-      github.event_name!='pull_request'
+      github.event_name!='pull_request' &&
+
     needs:
       - "build-php82"
     runs-on: "ubuntu-24.04"
@@ -98,7 +99,10 @@ jobs:
         working-directory: "${{ runner.temp }}/digests/"
         run: |
           DIGESTS=$( printf 'ghcr.io/openconext/openconext-basecontainers/php82-apache2@sha256:%s ' * )
-          TAGS="-t ghcr.io/openconext/openconext-basecontainers/php82-apache2:latest -t ghcr.io/openconext/openconext-basecontainers/php82-apache2:${{ github.sha }}"
+          TAGS="-t ghcr.io/openconext/openconext-basecontainers/php82-apache2:${{ github.sha }}"
+          if [ "${{ github.ref }}" = "refs/heads/main" ]; then
+              TAGS="${TAGS} -t ghcr.io/openconext/openconext-basecontainers/php82-apache2:latest"
+          fi
 
           echo "Creating docker manifest list"
           echo "Digests: $DIGESTS"
