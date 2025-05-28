@@ -37,7 +37,7 @@ jobs:
         uses: docker/build-push-action@v6
         id: build
         with:
-          context: ./php82-apache2
+          context: ./php72-apache2
           platforms: "linux/${{ matrix.arch }}"
           tags: "ghcr.io/openconext/openconext-basecontainers/php72-apache2"
           outputs: "type=image,push-by-digest=true,name-canonical=true,push=true"
@@ -103,4 +103,4 @@ jobs:
 
       - name: Inspect image
         run: |
-          docker buildx imagetools inspect ghcr.io/openconext/openconext-basecontainers/php82-apache2:latest
+          docker buildx imagetools inspect ghcr.io/openconext/openconext-basecontainers/php72-apache2:latest
