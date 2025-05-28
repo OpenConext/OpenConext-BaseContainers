@@ -10,7 +10,7 @@ RUN \
 COPY --from=node:14-slim /usr/local/bin /usr/local/bin
 COPY --from=node:14-slim /opt /opt
 COPY --from=node:14-slim /usr/local/lib/node_modules /usr/local/lib/node_modules
-RUN npm install -g yarn --force \
+RUN npm install -g yarn --force
 
 RUN \
     pecl install xdebug-3.1.6 && \
