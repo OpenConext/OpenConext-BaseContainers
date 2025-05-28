@@ -15,7 +15,10 @@ RUN \
     libfreetype6-dev \
     libjpeg62-turbo-dev \
     libpng-dev \
-    libgmp3-dev
+    libgmp3-dev \
+  && \
+  rm -rf /var/lib/apt/lists/* /var/cache/apt
+
 
 # Install the PHP 8.2 extensions we need
 RUN docker-php-ext-install -j$(nproc) pdo_mysql
