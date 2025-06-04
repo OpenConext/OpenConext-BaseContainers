@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 set -e
 
+if [[ -v DEBUG  ]]
+then
+    set -x
+fi
+
 # handle privilege dropping
 if [ $UID -ne 0 ]
 then
