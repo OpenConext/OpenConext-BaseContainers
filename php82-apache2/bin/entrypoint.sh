@@ -1,15 +1,6 @@
 #!/usr/bin/env bash
 set +e
 
-# Check and read the user and group env vars set by the user
-# Save them for later use as they will be overwritten by the next command
-if [[ -v APACHE_RUN_USER ]]; then
-	APACHE_UID=$APACHE_RUN_USER
-fi
-if [[ -v APACHE_RUN_GROUP ]]; then
-	APACHE_GUID=$APACHE_RUN_GROUP
-fi
-
 # Read the envars for Apache2
 source /etc/apache2/envvars
 
