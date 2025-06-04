@@ -37,22 +37,16 @@ then
         echo "Switching to user $RUNAS_UID"
         useradd -M -u $RUNAS_UID openconext
         PRIVDROP="runuser --user=openconext -- "
-fi
+    fi
     echo "Dropping privileges to $($PRIVDROP id -u):$($PRIVDROP id -g)"
+fi
 
-    # run custom scripts after dropping privileges
-    echo "Running custom scripts in /container-init-post as $RUNAS_UID"
-    if  [ -d "/container-init-post" ]
-    then
-        # run all scripts using run-parts
-        ${PRIVDROP} run-parts --verbose --regex '.*' "/container-init-post"
-    fi
-else
-    echo "Warning: not dropping privileges"
-    if [ -d "/container-init-post" ] && ! find /container-init-post/ -maxdepth 0 -empty
-    then
-        echo "Warning: not running scripts in /container-init-post as no user is specified"
-    fi
+# run custom scripts after dropping privileges
+echo "Running custom scripts in /container-init-post"
+if  [ -d "/container-init-post" ]
+then
+    # run all scripts using run-parts
+    ${PRIVDROP} run-parts --verbose --regex '.*' "/container-init-post"
 fi
 
 # Hand off to the CMD
