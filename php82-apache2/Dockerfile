@@ -44,6 +44,11 @@ RUN \
     icu-devtools \
     zlib1g-dev \
   && \
+  apt-get install -y \
+    libpng16-16 \
+    libjpeg62-turbo \
+    libfreetype6 \
+  && \
   rm -rf /var/lib/apt/lists/* /var/cache/apt
 
 # Enable the Apache2 modules we need and disable the ones we don't need
