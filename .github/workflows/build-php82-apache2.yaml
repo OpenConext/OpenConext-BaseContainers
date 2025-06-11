@@ -47,8 +47,9 @@ jobs:
         with:
           context: ./php82-apache2
           platforms: "linux/${{ matrix.arch }}"
+          push: "${{ github.ref == 'refs/heads/main' }}"
           tags: "ghcr.io/openconext/openconext-basecontainers/php82-apache2"
-          outputs: "type=image,push-by-digest=true,name-canonical=true,push=true"
+          outputs: "type=image,push-by-digest=true,name-canonical=true"
           cache-from: type=gha,scope=buildkit-${{ matrix.arch }}
           cache-to: type=gha,scope=buildkit-${{ matrix.arch }}
 
@@ -72,7 +73,8 @@ jobs:
     name: Merge images
     if: >
       github.actor!='dependabot[bot]' &&
-      github.event_name!='pull_request'
+      github.event_name!='pull_request' &&
+      github.ref == 'ref/head/main'
     needs:
       - "build-php82"
     runs-on: "ubuntu-24.04"
