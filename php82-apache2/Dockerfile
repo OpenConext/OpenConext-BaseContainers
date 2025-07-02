@@ -29,6 +29,8 @@ RUN docker-php-ext-install -j$(nproc) xml
 RUN docker-php-ext-install -j$(nproc) intl
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg && docker-php-ext-install -j$(nproc) gd
 
+# install xdebug but do not enable by default
+RUN pecl install xdebug
 
 # Clean up
 # don't autoremove, becasue that will remove libraries needed for the custom-built php extensions
