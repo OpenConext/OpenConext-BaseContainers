@@ -6,15 +6,22 @@ COPY --from=node:20-slim /opt /opt
 COPY --from=node:20-slim /usr/local/lib/node_modules /usr/local/lib/node_modules
 
 ENV DEBIAN_FRONTEND=noninteractive
-RUN apt update && \
-    apt -y install git unzip zip vim &&\
-    rm -rf /var/cache/apt /var/lib/apt/lists/*
+RUN \
+  apt-get update && \
+  apt-get -y install \
+    git \
+    unzip \
+    vim \
+    zip  \
+  && \
+  rm -rf /var/lib/apt/lists/* /var/cache/apt
+RUN npm install -g yarn --force
 
 # enable xdebug
 RUN docker-php-ext-enable xdebug
 COPY ./conf/xdebug.ini /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
 RUN mkdir -p /var/www/html/public
-RUN rm -rf /etc/apache2/sites-enabled/*
 
+RUN rm -rf /etc/apache2/sites-enabled/*
 COPY ./conf/appconf.conf /etc/apache2/sites-enabled/

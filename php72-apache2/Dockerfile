@@ -3,23 +3,23 @@ FROM docker.io/library/php:7.2-apache-buster
 ENV PHP_MEMORY_LIMIT=128M
 ENV TZ=Europe/Amsterdam
 ENV DEBIAN_FRONTEND=noninteractive
+
 # Copy the Composer PHAR from the Composer image into the PHP image
-COPY --from=composer:1.9.3 /usr/bin/composer /usr/bin/composer
-RUN chmod +x /usr/bin/composer
+COPY --from=composer:1.9.3 --chmod=755 /usr/bin/composer /usr/bin/composer
 
 # Install the packages we need
 RUN \
   apt-get update && \
   apt-get install -y \
     curl \
-    libxml2 \
-    libxml2-dev \
-    libicu-dev \
     libfreetype6-dev \
+    libgmp3-dev \
+    libicu-dev \
     libjpeg62-turbo-dev \
     libpng-dev \
-    libgmp3-dev \
-  && \
+    libxml2 \
+    libxml2-dev \
+     && \
   rm -rf /var/lib/apt/lists/* /var/cache/apt
 
 # Install the PHP 7.2 extensions we need
@@ -46,14 +46,14 @@ RUN pecl install xdebug-3.1.6
 # don't autoremove, becasue that will remove libraries needed for the custom-built php extensions
 RUN \
   apt-get -y purge \
-    libxml2-dev \
-    libicu-dev \
+    icu-devtools \
     libfreetype6-dev \
-    libjpeg62-turbo-dev \
-    libpng-dev \
     libgmp-dev \
     libgmp3-dev \
-    icu-devtools \
+    libicu-dev \
+    libjpeg62-turbo-dev \
+    libpng-dev \
+    libxml2-dev \
     zlib1g-dev \
   && \
   rm -rf /var/lib/apt/lists/* /var/cache/apt
@@ -69,8 +69,7 @@ COPY ./conf/openconext.conf  ./conf/security.conf  /etc/apache2/conf-enabled/
 COPY ./conf/php.ini ./conf/php-cli.ini /usr/local/etc/php/
 
 # Copy the startup script
-COPY ./bin/entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+COPY --chmod=755 ./bin/entrypoint.sh /entrypoint.sh
 
 # Set the default workdir
 WORKDIR /var/www/html
