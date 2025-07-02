@@ -11,7 +11,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-push-php82:
+  build-push-php82-node20:
     runs-on: ubuntu-latest
     permissions:
       packages: write
