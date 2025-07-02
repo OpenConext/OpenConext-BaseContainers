@@ -10,8 +10,8 @@ RUN apt update && \
     apt -y install git unzip zip vim &&\
     rm -rf /var/cache/apt /var/lib/apt/lists/*
 
-RUN pecl install xdebug && docker-php-ext-enable xdebug
-
+# enable xdebug
+RUN docker-php-ext-enable xdebug
 COPY ./conf/xdebug.ini /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
 RUN mkdir -p /var/www/html/public

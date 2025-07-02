@@ -12,9 +12,9 @@ COPY --from=node:14-slim /opt /opt
 COPY --from=node:14-slim /usr/local/lib/node_modules /usr/local/lib/node_modules
 RUN npm install -g yarn --force
 
-RUN \
-    pecl install xdebug-3.1.6 && \
-    docker-php-ext-enable xdebug
+
+# enable xdebug
+RUN docker-php-ext-enable xdebug
 COPY ./conf/xdebug.ini /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
 RUN \

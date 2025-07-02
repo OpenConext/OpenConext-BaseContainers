@@ -39,6 +39,9 @@ RUN pecl install -f apcu_bc
 COPY ./conf/apcu.ini /usr/local/etc/php/conf.d/91-apcu.ini
 COPY ./conf/apc.ini  /usr/local/etc/php/conf.d/92-acp.ini
 
+# install xdebug but do not enable by default
+RUN pecl install xdebug-3.1.6
+
 # Clean up
 # don't autoremove, becasue that will remove libraries needed for the custom-built php extensions
 RUN \
