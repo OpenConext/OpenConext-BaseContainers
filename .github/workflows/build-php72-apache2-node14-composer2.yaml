@@ -11,7 +11,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-push-php72:
+  build-push-php72-node14:
     runs-on: ubuntu-latest
     permissions:
       packages: write
