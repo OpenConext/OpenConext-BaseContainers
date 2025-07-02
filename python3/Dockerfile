@@ -1,5 +1,8 @@
 FROM docker.io/library/python:3.11-slim-bookworm
 
+ENV PYTHON_VERSION_MAJOR=3
+ENV PYTHON_VERSION_MINOR=3.11
+
 # Do an initial clean up and general upgrade of the distribution
 ENV DEBIAN_FRONTEND=noninteractive
 RUN \
