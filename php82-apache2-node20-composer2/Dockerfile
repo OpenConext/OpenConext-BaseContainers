@@ -1,6 +1,6 @@
 FROM ghcr.io/openconext/openconext-basecontainers/php82-apache2:latest
 
-COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+COPY --from=composer:2   /usr/bin/composer /usr/bin/composer
 COPY --from=node:20-slim /usr/local/bin /usr/local/bin
 COPY --from=node:20-slim /opt /opt
 COPY --from=node:20-slim /usr/local/lib/node_modules /usr/local/lib/node_modules

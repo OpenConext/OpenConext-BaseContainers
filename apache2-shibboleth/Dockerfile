@@ -21,13 +21,9 @@ RUN a2enmod shib
 COPY ./conf/shibboleth/* /etc/shibboleth/
 
 # Copy the startup script
-COPY ./bin/entrypoint.sh /entrypoint.sh
-COPY ./bin/shib.sh /usr/local/bin/shib.sh
-RUN chmod +x /entrypoint.sh ; chmod +x /usr/local/bin/shib.sh
+COPY --chmod=755 ./bin/entrypoint.sh /entrypoint.sh
+COPY --chmod=755 ./bin/shib.sh /usr/local/bin/shib.sh
 
-# Copy the entrypoint script
-COPY ./bin/entrypoint.sh /entrypoint.sh
-RUN chmod 755 /entrypoint.sh
 # Set the default workdir
 WORKDIR /var/www/html
 
