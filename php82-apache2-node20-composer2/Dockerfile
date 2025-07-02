@@ -5,23 +5,16 @@ COPY --from=node:20-slim /usr/local/bin /usr/local/bin
 COPY --from=node:20-slim /opt /opt
 COPY --from=node:20-slim /usr/local/lib/node_modules /usr/local/lib/node_modules
 
-RUN \
-  apt update && \
-  apt -y install \
-    git \
-    unzip \
-    zip \
-    vim \
-  && \
-  rm -rf /var/lib/apt/lists/* /var/cache/apt
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt update && \
+    apt -y install git unzip zip vim &&\
+    rm -rf /var/cache/apt /var/lib/apt/lists/*
 
-RUN \
-  pecl install xdebug && \
-  docker-php-ext-enable xdebug
+RUN pecl install xdebug && docker-php-ext-enable xdebug
+
 COPY ./conf/xdebug.ini /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
-RUN \
-    rm -rf /etc/apache2/sites-enabled/* && \
-    mkdir -p /var/www/html/public
+RUN mkdir -p /var/www/html/public
+RUN rm -rf /etc/apache2/sites-enabled/*
 
 COPY ./conf/appconf.conf /etc/apache2/sites-enabled/

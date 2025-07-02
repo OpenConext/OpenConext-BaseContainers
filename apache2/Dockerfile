@@ -7,9 +7,9 @@ RUN apt update && \
     apt -y install \
         apache2 \
         curl \
-        xz-utils && \
-    rm -rf /var/cache/apt && \
-    rm -rf /var/lib/apt/lists/*
+        xz-utils  \
+    && \
+    rm -rf /var/cache/apt /var/lib/apt/lists/*
 
 # Copy the default apache config
 COPY ./conf/security.conf ./conf/openconext.conf /etc/apache2/conf-available/
