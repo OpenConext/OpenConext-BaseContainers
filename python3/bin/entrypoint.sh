@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+DEFAULT_UID=10000
+DEFAULT_GID=10000
+
 set -e
 
 if [[ -v DEBUG  ]]
@@ -23,10 +26,10 @@ create_user_and_group() {
                 echo "       Please recreate the container with the updated gid" >&2
                 exit 1
             fi
-            echo "Group '$groupname' already exists with correct GID $gid"
+            echo "Group '$groupname' already exists with correct GID $gid" >&2
         else
             # Group doesn't exist, create it
-            echo "Creating group '$groupname' with GID $gid"
+            echo "Creating group '$groupname' with GID $gid" >&2
             groupadd -g "$gid" "$groupname"
         fi
     fi
@@ -51,14 +54,14 @@ create_user_and_group() {
             fi
         fi
 
-        echo "User '$username' already exists with correct UID $uid"
+        echo "User '$username' already exists with correct UID $uid" >&2
     else
         # User doesn't exist, create it
         if [ -n "$gid" ]; then
-            echo "Creating user '$username' with UID $uid and GID $gid"
+            echo "Creating user '$username' with UID $uid and GID $gid" >&2
             useradd -M -u "$uid" -g "$gid" "$username"
         else
-            echo "Creating user '$username' with UID $uid"
+            echo "Creating user '$username' with UID $uid" >&2
             useradd -M -u "$uid" "$username"
         fi
     fi
@@ -82,12 +85,8 @@ then
 fi
 
 # set up privilege dropping to user and group
-PRIVDROP=
-if [ -n "$RUNAS_UID" ]
-then
-    PRIVDROP=$(create_user_and_group "$RUNAS_UID" "$RUNAS_GID")
-    echo "Dropping privileges to $($PRIVDROP id -u):$($PRIVDROP id -g)"
-fi
+PRIVDROP=$(create_user_and_group "${RUNAS_UID:-$DEFAULT_UID}" "${RUNAS_GID:-$DEFAULT_GID}")
+echo "Dropping privileges to $($PRIVDROP id -u):$($PRIVDROP id -g)"
 
 # run custom scripts before dropping privileges
 echo "Running custom scripts in /container-init as root"
