@@ -1,7 +1,4 @@
 #!/usr/bin/env bash
-DEFAULT_UID=10000
-DEFAULT_GID=10000
-
 set -e
 
 if [[ -v DEBUG  ]]
@@ -85,8 +82,15 @@ then
 fi
 
 # set up privilege dropping to user and group
-PRIVDROP=$(create_user_and_group "${RUNAS_UID:-$DEFAULT_UID}" "${RUNAS_GID:-$DEFAULT_GID}")
-echo "Dropping privileges to $($PRIVDROP id -u):$($PRIVDROP id -g)"
+PRIVDROP=
+if [ -n "$RUNAS_UID" ] || [ -n "$RUNAS_GID" ]
+then
+    PRIVDROP=$(create_user_and_group "${RUNAS_UID}" "${RUNAS_GID}")
+    echo "Dropping privileges to $($PRIVDROP id -u):$($PRIVDROP id -g)"
+else
+    echo "ERROR: Please set RUNAS_UID and RUNAS_GID environment variables"
+    exit 1
+fi
 
 # run custom scripts before dropping privileges
 echo "Running custom scripts in /container-init as root"
