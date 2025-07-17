@@ -4,6 +4,12 @@ ENV PHP_MEMORY_LIMIT=128M
 ENV TZ=Europe/Amsterdam
 ENV DEBIAN_FRONTEND=noninteractive
 
+# Debian Buster is archived
+RUN echo " \
+    deb http://archive.debian.org/debian buster main \
+    deb http://archive.debian.org/debian buster-updates main \
+    " > /etc/apt/sources.list
+
 # Copy the Composer PHAR from the Composer image into the PHP image
 COPY --from=composer:1.9.3 --chmod=755 /usr/bin/composer /usr/bin/composer
 
