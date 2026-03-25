@@ -10,7 +10,7 @@ RUN \
         libapache2-mod-shib \
         gettext \
     && \
-    rm -rf /var/cache/apt /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/* /var/cache/apt /var/log/alternatives.log /var/log/apt /var/log/dpkg.log
 
 
 # Enable Shib

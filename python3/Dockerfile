@@ -21,7 +21,7 @@ RUN \
         xz-utils                                         \
         && \
     apt-get -y autoremove                             && \
-    rm -rf /var/cache/apt /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/* /var/cache/apt /var/log/alternatives.log /var/log/apt /var/log/dpkg.log
 
 # if specified, drop privileges to this uid and gid
 ARG RUNAS_UID

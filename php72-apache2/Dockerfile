@@ -26,7 +26,7 @@ RUN \
     libxml2 \
     libxml2-dev \
      && \
-  rm -rf /var/lib/apt/lists/* /var/cache/apt
+  rm -rf /var/lib/apt/lists/* /var/cache/apt /var/log/alternatives.log /var/log/apt /var/log/dpkg.log
 
 # Install the PHP 7.2 extensions we need
 RUN docker-php-ext-install -j$(nproc) soap
@@ -62,7 +62,7 @@ RUN \
     libxml2-dev \
     zlib1g-dev \
   && \
-  rm -rf /var/lib/apt/lists/* /var/cache/apt
+  rm -rf /var/lib/apt/lists/* /var/cache/apt /var/log/alternatives.log /var/log/apt /var/log/dpkg.log
 
 # Enable the Apache2 modules we need and disable the ones we don't need
 RUN \

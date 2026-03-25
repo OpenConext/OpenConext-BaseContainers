@@ -14,7 +14,7 @@ RUN \
     vim \
     zip  \
   && \
-  rm -rf /var/lib/apt/lists/* /var/cache/apt
+  rm -rf /var/lib/apt/lists/* /var/cache/apt /var/log/alternatives.log /var/log/apt /var/log/dpkg.log
 RUN npm install -g yarn --force
 
 # enable xdebug

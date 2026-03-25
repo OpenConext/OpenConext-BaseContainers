@@ -20,7 +20,7 @@ RUN \
     libxml2 \
     libxml2-dev \
   && \
-  rm -rf /var/lib/apt/lists/* /var/cache/apt
+  rm -rf /var/lib/apt/lists/* /var/cache/apt /var/log/alternatives.log /var/log/apt /var/log/dpkg.log
 
 # Install the PHP 8.2 extensions we need
 RUN docker-php-ext-install -j$(nproc) pdo_mysql

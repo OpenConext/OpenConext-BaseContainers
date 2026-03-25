@@ -9,7 +9,7 @@ RUN apt update && \
         curl \
         xz-utils  \
     && \
-    rm -rf /var/cache/apt /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/* /var/cache/apt /var/log/alternatives.log /var/log/apt /var/log/dpkg.log
 
 # Copy the default apache config
 COPY ./conf/security.conf ./conf/openconext.conf /etc/apache2/conf-available/
