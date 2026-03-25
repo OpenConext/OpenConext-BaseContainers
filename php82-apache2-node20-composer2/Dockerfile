@@ -7,14 +7,14 @@ COPY --from=node:20-slim /usr/local/lib/node_modules /usr/local/lib/node_modules
 
 ENV DEBIAN_FRONTEND=noninteractive
 RUN \
-  apt-get update && \
-  apt-get -y install \
-    git \
-    unzip \
-    vim \
-    zip  \
-  && \
-  rm -rf /var/lib/apt/lists/* /var/cache/apt /var/log/alternatives.log /var/log/apt /var/log/dpkg.log
+    apt-get update && \
+    apt-get -y install \
+        git \
+        unzip \
+        vim \
+        zip  \
+    && \
+    rm -rf /var/lib/apt/lists/* /var/cache/apt /var/log/alternatives.log /var/log/apt /var/log/dpkg.log
 RUN npm install -g yarn --force
 
 # enable xdebug

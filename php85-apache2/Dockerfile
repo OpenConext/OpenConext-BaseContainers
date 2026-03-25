@@ -9,18 +9,18 @@ COPY --from=docker.io/library/composer:2 --chmod=755 /usr/bin/composer /usr/bin/
 
 # Install the packages we need
 RUN \
-  apt-get update && \
-  apt-get install -y \
-    curl \
-    libfreetype6-dev \
-    libgmp3-dev \
-    libicu-dev \
-    libjpeg62-turbo-dev \
-    libpng-dev \
-    libxml2 \
-    libxml2-dev \
-  && \
-  rm -rf /var/lib/apt/lists/* /var/cache/apt /var/log/alternatives.log /var/log/apt /var/log/dpkg.log
+    apt-get update && \
+    apt-get install -y \
+        curl \
+        libfreetype6-dev \
+        libgmp3-dev \
+        libicu-dev \
+        libjpeg62-turbo-dev \
+        libpng-dev \
+        libxml2 \
+        libxml2-dev \
+    && \
+    rm -rf /var/lib/apt/lists/* /var/cache/apt /var/log/alternatives.log /var/log/apt /var/log/dpkg.log
 
 # Install the PHP 8.5 extensions we need
 RUN docker-php-ext-install -j$(nproc) pdo_mysql
@@ -32,32 +32,32 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg && docker-php-ext-in
 
 # install xdebug but do not enable by default
 RUN \
-  pecl install xdebug \
-  && \
-  rm -rf /tmp/pear
+    pecl install xdebug \
+    && \
+    rm -rf /tmp/pear
 
 
 # Clean up
 # don't autoremove, becasue that will remove libraries needed for the custom-built php extensions
 RUN \
-  apt-get -y purge \
-    icu-devtools \
-    libfreetype6-dev \
-    libgmp-dev \
-    libgmp3-dev \
-    libicu-dev \
-    libjpeg62-turbo-dev \
-    libpng-dev \
-    libxml2-dev \
-    zlib1g-dev \
-  && \
-  rm -rf /var/lib/apt/lists/* /var/cache/apt  /var/log/alternatives.log /var/log/apt /var/log/dpkg.log
+    apt-get -y purge \
+        icu-devtools \
+        libfreetype6-dev \
+        libgmp-dev \
+        libgmp3-dev \
+        libicu-dev \
+        libjpeg62-turbo-dev \
+        libpng-dev \
+        libxml2-dev \
+        zlib1g-dev \
+    && \
+    rm -rf /var/lib/apt/lists/* /var/cache/apt  /var/log/alternatives.log /var/log/apt /var/log/dpkg.log
 
 # Enable the Apache2 modules we need and disable the ones we don't need
 RUN \
-  a2enmod rewrite headers expires proxy_fcgi remoteip \
-  && \
-  a2dismod status
+    a2enmod rewrite headers expires proxy_fcgi remoteip \
+    && \
+    a2dismod status
 
 # Copy the openconext specific config
 COPY ./conf/openconext.conf  ./conf/security.conf  /etc/apache2/conf-enabled/
