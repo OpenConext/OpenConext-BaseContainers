@@ -42,6 +42,11 @@ docker run -e APACHE_UID=#1337 ghcr.io/openconext/openconext-basecontainers/php7
 - You can supply the environment variable TZ to set the timezone on the php82 containers
 - You can add PHP_MEMORY_LIMIT to override the default setting of 128M php memory limit on the php82 containers
 
+### satosa container
 
-
-
+- At every start, the satosa container will create a new satosa user and group.</br>
+- You can supply the environment variables RUNAS_UID and RUNAS_GID to configure the chosen uid and gid inside the container.</br>
+- Without RUNAS_UID and RUNAS_GID the container will fall back to uid=1000 and gid=1000
+```
+docker run -e RUNAS_UID=1234 -e RUNAS_GID=1234 --rm ghcr.io/openconext/openconext-basecontainers/satosa:latest
+```
