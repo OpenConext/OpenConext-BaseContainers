@@ -9,87 +9,136 @@ updates:
       interval: "weekly"
     labels:
       - github-actions-update
+
+  # ---- Docker groups – only patch updates ----
   - package-ecosystem: docker
     directory: "/apache2"
     schedule:
       interval: weekly
+    groups:
+      docker-patch:
+        update-types: [ "version-update:semver-patch" ]   # ← only patch PRs
     open-pull-requests-limit: 5
     labels:
       - docker-base-update
+
   - package-ecosystem: docker
     directory: "/apache2-shibboleth"
     schedule:
       interval: weekly
+    groups:
+      docker-patch:
+        update-types: [ "version-update:semver-patch" ]
     open-pull-requests-limit: 5
     labels:
       - docker-base-update
+
   - package-ecosystem: docker
     directory: "/haproxy28"
     schedule:
       interval: weekly
+    groups:
+      docker-patch:
+        update-types: [ "version-update:semver-patch" ]
     open-pull-requests-limit: 5
     labels:
       - docker-base-update
+
   - package-ecosystem: docker
     directory: "/php72-apache2"
     schedule:
       interval: weekly
+    groups:
+      docker-patch:
+        update-types: [ "version-update:semver-patch" ]
     open-pull-requests-limit: 5
     labels:
       - docker-base-update
+
   - package-ecosystem: docker
     directory: "/php72-apache2-node14-composer2"
     schedule:
       interval: weekly
+    groups:
+      docker-patch:
+        update-types: [ "version-update:semver-patch" ]
     open-pull-requests-limit: 5
     labels:
       - docker-base-update
+
   - package-ecosystem: docker
     directory: "/php72-apache2-node16-composer2"
     schedule:
       interval: weekly
+    groups:
+      docker-patch:
+        update-types: [ "version-update:semver-patch" ]
     open-pull-requests-limit: 5
     labels:
       - docker-base-update
+
   - package-ecosystem: docker
     directory: "/php82-apache2"
     schedule:
       interval: weekly
+    groups:
+      docker-patch:
+        update-types: [ "version-update:semver-patch" ]
     open-pull-requests-limit: 5
     labels:
       - docker-base-update
+
   - package-ecosystem: docker
     directory: "/php82-apache2-node20-composer2"
     schedule:
       interval: weekly
+    groups:
+      docker-patch:
+        update-types: [ "version-update:semver-patch" ]
     open-pull-requests-limit: 5
     labels:
       - docker-base-update
+
   - package-ecosystem: docker
     directory: "/php85-apache2"
     schedule:
       interval: weekly
+    groups:
+      docker-patch:
+        update-types: [ "version-update:semver-patch" ]
     open-pull-requests-limit: 5
     labels:
       - docker-base-update
+
   - package-ecosystem: docker
     directory: "/php85-apache2-node24"
     schedule:
       interval: weekly
+    groups:
+      docker-patch:
+        update-types: [ "version-update:semver-patch" ]
     open-pull-requests-limit: 5
     labels:
       - docker-base-update
+
   - package-ecosystem: docker
     directory: "/python3"
     schedule:
       interval: weekly
+    groups:
+      docker-patch:
+        update-types: [ "version-update:semver-patch" ]
     open-pull-requests-limit: 5
     labels:
       - docker-base-update
+
   - package-ecosystem: docker
     directory: "/satosa"
     schedule:
       interval: weekly
+    groups:
+      docker-patch:
+        update-types: [ "version-update:semver-patch" ]
     open-pull-requests-limit: 5
     labels:
       - docker-base-update
