@@ -1,3 +1,3 @@
-FROM haproxy:2.8
+FROM haproxy:3.4
 COPY conf/haproxy.pem /usr/local/etc/haproxy
 
