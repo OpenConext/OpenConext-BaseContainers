@@ -7,3 +7,12 @@ updates:
         update-types: [ "major", "minor", "patch" ]
     schedule:
       interval: "weekly"
+    labels:
+      - github-actions-update
+  - package-ecosystem: docker
+    directory: "/"
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    labels:
+      - docker-base-update
