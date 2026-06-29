@@ -11,13 +11,12 @@ on:
   workflow_dispatch:
 
 jobs:
-
   build-php72:
     permissions:
       packages: write
     strategy:
       matrix:
-        arch: [ 'amd64', 'arm64' ]
+        arch: ['amd64', 'arm64']
     runs-on: "ubuntu-24.04${{ matrix.arch == 'arm64' && '-arm' || '' }}"
     steps:
       - name: Checkout
