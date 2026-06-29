@@ -1,4 +1,4 @@
-FROM docker.io/library/php:8.2-apache-bookworm
+FROM docker.io/library/php:8.5-apache-bookworm
 #Some default environment variables. They can be overridden when starting the container
 ENV PHP_MEMORY_LIMIT=128M
 ENV TZ=Europe/Amsterdam
