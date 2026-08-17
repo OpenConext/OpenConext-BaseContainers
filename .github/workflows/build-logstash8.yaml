@@ -1,5 +1,5 @@
 ---
-name: Build the Satosa container
+name: Build the Logstash8 container
 
 on:
   push:
