@@ -11,7 +11,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-push-satosa:
+  build-push-logstash8:
     runs-on: "ubuntu-latest"
     permissions:
       packages: write
