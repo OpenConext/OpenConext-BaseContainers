@@ -1,4 +1,4 @@
-FROM docker.io/library/php:7.2-apache-buster
+FROM docker.io/library/php:7.4-apache-buster
 #Some default environment variables. They can be overridden when starting the container
 ENV PHP_MEMORY_LIMIT=128M
 ENV TZ=Europe/Amsterdam
