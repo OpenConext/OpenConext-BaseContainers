@@ -9,6 +9,9 @@ We provide the following base containers which can be used in downstream project
 **Apache 2 with shibboleth**</br>
 ![Build status for apache2 shibboleth production image](https://github.com/OpenConext/OpenConext-BaseContainers/actions/workflows/build-apache2-shibboleth.yaml/badge.svg)
 
+## JAVA containers
+**Plain JAVA 21**</br>
+![Build status for plain JAVA 21 production image](https://github.com/OpenConext/OpenConext-BaseContainers/actions/workflows/build-java21.yaml/badge.svg)
 
 ## PHP 72 images
 
