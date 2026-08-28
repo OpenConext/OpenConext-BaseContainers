@@ -8,7 +8,11 @@ if [[ -v APACHE_RUN_USER ]]; then
     APACHE_UID=$APACHE_RUN_USER
 fi
 if [[ -v APACHE_RUN_GROUP ]]; then
-    APACHE_GUID=$APACHE_RUN_GROUP
+    APACHE_GID=$APACHE_RUN_GROUP
+fi
+
+if [[ ! -v APACHE_GID ]] && [[ -v APACHE_GUID ]]; then
+    APACHE_GID=$APACHE_GUID
 fi
 
 # Read the envars for Apache2
@@ -19,11 +23,11 @@ source /etc/apache2/envvars
 if [[ -v APACHE_UID ]]; then
     export APACHE_RUN_USER=$APACHE_UID
     APACHE_UID_TO_CREATE=$(echo $APACHE_UID | sed 's/#//')
-        if [[ -v APACHE_GUID ]]; then
-            export APACHE_RUN_GROUP=$APACHE_GUID
-            APACHE_GUID_TO_CREATE=$(echo $APACHE_GUID | sed 's/#//')
-            [ $(getent group openconext) ] || groupadd -g $APACHE_GUID_TO_CREATE openconext
-            [ $(getent passwd openconext) ] || useradd -M -u $APACHE_UID_TO_CREATE -g $APACHE_GUID_TO_CREATE openconext
+        if [[ -v APACHE_GID ]]; then
+            export APACHE_RUN_GROUP=$APACHE_GID
+            APACHE_GID_TO_CREATE=$(echo $APACHE_GID | sed 's/#//')
+            [ $(getent group openconext) ] || groupadd -g $APACHE_GID_TO_CREATE openconext
+            [ $(getent passwd openconext) ] || useradd -M -u $APACHE_UID_TO_CREATE -g $APACHE_GID_TO_CREATE openconext
         else
             [ $(getent passwd openconext) ] || useradd -M -u $APACHE_UID_TO_CREATE openconext
     fi
@@ -35,8 +39,8 @@ for dir in \
     "$APACHE_LOG_DIR" \
 ; do \
     if [[ -v APACHE_UID_TO_CREATE ]]; then
-        if [[ -v APACHE_GUID_TO_CREATE ]]; then
-            chown -R "$APACHE_UID_TO_CREATE:$APACHE_GUID_TO_CREATE" "$dir";
+        if [[ -v APACHE_GID_TO_CREATE ]]; then
+            chown -R "$APACHE_UID_TO_CREATE:$APACHE_GID_TO_CREATE" "$dir";
         else
             chown -R "$APACHE_UID_TO_CREATE" "$dir";
         fi
