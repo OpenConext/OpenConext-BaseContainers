@@ -35,11 +35,11 @@ We provide the following base containers which can be used in downstream project
 ## Features
 
 - At every start, the php containers will recreate the symfony cache dir. </br>
-- You can supply the environment variable APACHE_UID. It creates the user "openconext", and starts Apache with that the supplied uid. 
+- You can supply the environment variables APACHE_UID and APACHE_GID. It creates the user and group "openconext", and starts Apache with the supplied uid and gid. 
 This allows for strict permissions on mounted files.
-You need to prefix the uid with a # like so:
+You need to prefix the uid/gid with a # like so:
 ```
-docker run -e APACHE_UID=#1337 ghcr.io/openconext/openconext-basecontainers/php72-apache2:latest
+docker run -e APACHE_UID=#1337 -e APACHE_GID=#1337 ghcr.io/openconext/openconext-basecontainers/php72-apache2:latest
 ```
 - You can supply the environment variable "HTTPD_CSP" which will set the CSP header on responses.
 - You can supply the environment variable TZ to set the timezone on the php82 containers
