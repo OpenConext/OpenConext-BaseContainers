@@ -11,6 +11,10 @@ We provide the following base containers which can be used in downstream project
 ### Apache 2 with shibboleth
 
 ![Build status for apache2 shibboleth production image](https://github.com/OpenConext/OpenConext-BaseContainers/actions/workflows/build-apache2-shibboleth.yaml/badge.svg)
+## JAVA containers
+
+**Plain JAVA 21**
+![Build status for plain JAVA 21 production image](https://github.com/OpenConext/OpenConext-BaseContainers/actions/workflows/build-java21.yaml/badge.svg)
 
 ## PHP 72 images
 
@@ -42,6 +46,12 @@ We provide the following base containers which can be used in downstream project
 
 ```sh
 docker run -e APACHE_UID=#1337 ghcr.io/openconext/openconext-basecontainers/php72-apache2:latest
+- At every start, the php containers will recreate the symfony cache dir. </br>
+- You can supply the environment variables APACHE_UID and APACHE_GID. It creates the user and group "openconext", and starts Apache with the supplied uid and gid. 
+This allows for strict permissions on mounted files.
+You need to prefix the uid/gid with a # like so:
+```
+docker run -e APACHE_UID=#1337 -e APACHE_GID=#1337 ghcr.io/openconext/openconext-basecontainers/php72-apache2:latest
 ```
 
 - You can supply the environment variable "HTTPD_CSP" which will set the CSP header on responses.

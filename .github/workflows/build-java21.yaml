@@ -1,17 +1,17 @@
 ---
-name: Build the Haproxy container
+name: Build the JAVA container
 
 on:
   push:
     paths:
-      - "haproxy28/**"
-      - ".github/workflows/build-haproxy28.yaml"
+      - "java21/**"
+      - ".github/workflows/build-java21.yaml"
   schedule:
     - cron: '30 7 * * *'
   workflow_dispatch:
 
 jobs:
-  build-push-haproxy28:
+  build-push-java21:
     runs-on: ubuntu-latest
     permissions:
       packages: write
@@ -32,27 +32,15 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Add the https key to the haproxy certificate file
-        run: |
-          echo "${{ secrets.LOADBALANCER_HTTP_KEY }}" > ./haproxy28/conf/haproxy.pem
-
-      - name: Add the https certificate to the haproxy certificate file
-        run: |
-          cat ./haproxy28/conf/haproxy.crt >> ./haproxy28/conf/haproxy.pem
-
-      - name: Chmod the haproxy.pem
-        run: |
-          chmod 444 ./haproxy28/conf/haproxy.pem
-
       - name: Build and push
         uses: docker/build-push-action@v7
         with:
-          context: ./haproxy28
+          context: ./java21
           platforms: linux/amd64,linux/arm64
           # only push the latest tag on the main branch
           push: "${{ github.ref == 'refs/heads/main' }}"
           tags: |
-            ghcr.io/openconext/openconext-basecontainers/haproxy28:latest
-            ghcr.io/openconext/openconext-basecontainers/haproxy28:${{ github.sha }}
+            ghcr.io/openconext/openconext-basecontainers/java21:latest
+            ghcr.io/openconext/openconext-basecontainers/java21:${{ github.sha }}
           cache-from: type=gha
           cache-to: type=gha
