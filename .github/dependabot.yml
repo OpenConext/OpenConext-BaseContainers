@@ -1,10 +1,10 @@
----
 version: 2
 updates:
   - package-ecosystem: "github-actions"
     directory: "/"
     groups:
-      - dependency-type: "all"
+      gha:
+        update-types: [ "major", "minor", "patch" ]
     schedule:
       interval: "weekly"
     labels:
@@ -17,10 +17,7 @@ updates:
       interval: weekly
     groups:
       docker-patch:
-        patterns:
-          - "*"
-        update-types:
-          - "version-update:semver-patch"
+        update-types: [ "version-update:semver-patch" ]   # ← only patch PRs
     open-pull-requests-limit: 5
     labels:
       - docker-base-update
@@ -31,10 +28,7 @@ updates:
       interval: weekly
     groups:
       docker-patch:
-        patterns:
-          - "*"
-        update-types:
-          - "version-update:semver-patch"
+        update-types: [ "version-update:semver-patch" ]
     open-pull-requests-limit: 5
     labels:
       - docker-base-update
@@ -45,10 +39,7 @@ updates:
       interval: weekly
     groups:
       docker-patch:
-        patterns:
-          - "*"
-        update-types:
-          - "version-update:semver-patch"
+        update-types: [ "version-update:semver-patch" ]
     open-pull-requests-limit: 5
     labels:
       - docker-base-update
@@ -59,10 +50,7 @@ updates:
       interval: weekly
     groups:
       docker-patch:
-        patterns:
-          - "*"
-        update-types:
-          - "version-update:semver-patch"
+        update-types: [ "version-update:semver-patch" ]
     open-pull-requests-limit: 5
     labels:
       - docker-base-update
@@ -73,10 +61,7 @@ updates:
       interval: weekly
     groups:
       docker-patch:
-        patterns:
-          - "*"
-        update-types:
-          - "version-update:semver-patch"
+        update-types: [ "version-update:semver-patch" ]
     open-pull-requests-limit: 5
     labels:
       - docker-base-update
@@ -87,10 +72,7 @@ updates:
       interval: weekly
     groups:
       docker-patch:
-        patterns:
-          - "*"
-        update-types:
-          - "version-update:semver-patch"
+        update-types: [ "version-update:semver-patch" ]
     open-pull-requests-limit: 5
     labels:
       - docker-base-update
@@ -101,10 +83,7 @@ updates:
       interval: weekly
     groups:
       docker-patch:
-        patterns:
-          - "*"
-        update-types:
-          - "version-update:semver-patch"
+        update-types: [ "version-update:semver-patch" ]
     open-pull-requests-limit: 5
     labels:
       - docker-base-update
@@ -115,10 +94,7 @@ updates:
       interval: weekly
     groups:
       docker-patch:
-        patterns:
-          - "*"
-        update-types:
-          - "version-update:semver-patch"
+        update-types: [ "version-update:semver-patch" ]
     open-pull-requests-limit: 5
     labels:
       - docker-base-update
@@ -129,10 +105,7 @@ updates:
       interval: weekly
     groups:
       docker-patch:
-        patterns:
-          - "*"
-        update-types:
-          - "version-update:semver-patch"
+        update-types: [ "version-update:semver-patch" ]
     open-pull-requests-limit: 5
     labels:
       - docker-base-update
@@ -143,10 +116,7 @@ updates:
       interval: weekly
     groups:
       docker-patch:
-        patterns:
-          - "*"
-        update-types:
-          - "version-update:semver-patch"
+        update-types: [ "version-update:semver-patch" ]
     open-pull-requests-limit: 5
     labels:
       - docker-base-update
@@ -157,10 +127,7 @@ updates:
       interval: weekly
     groups:
       docker-patch:
-        patterns:
-          - "*"
-        update-types:
-          - "version-update:semver-patch"
+        update-types: [ "version-update:semver-patch" ]
     open-pull-requests-limit: 5
     labels:
       - docker-base-update
@@ -171,10 +138,7 @@ updates:
       interval: weekly
     groups:
       docker-patch:
-        patterns:
-          - "*"
-        update-types:
-          - "version-update:semver-patch"
+        update-types: [ "version-update:semver-patch" ]
     open-pull-requests-limit: 5
     labels:
       - docker-base-update
