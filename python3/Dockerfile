@@ -1,4 +1,4 @@
-FROM docker.io/library/python:3.11-slim-bookworm
+FROM docker.io/library/python:3.14-slim-bookworm
 
 ENV PYTHON_VERSION_MAJOR=3
 ENV PYTHON_VERSION_MINOR=3.11
