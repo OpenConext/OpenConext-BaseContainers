@@ -4,8 +4,7 @@ updates:
   - package-ecosystem: "github-actions"
     directory: "/"
     groups:
-      gha:
-        update-types: ["major", "minor", "patch"]
+      - dependency-type: "all"
     schedule:
       interval: "weekly"
     labels:
@@ -18,7 +17,10 @@ updates:
       interval: weekly
     groups:
       docker-patch:
-        update-types: ["version-update:semver-patch"]  # only patch PRs
+        patterns:
+          - "*"
+        update-types:
+          - "version-update:semver-patch"
     open-pull-requests-limit: 5
     labels:
       - docker-base-update
@@ -29,7 +31,10 @@ updates:
       interval: weekly
     groups:
       docker-patch:
-        update-types: ["version-update:semver-patch"]
+        patterns:
+          - "*"
+        update-types:
+          - "version-update:semver-patch"
     open-pull-requests-limit: 5
     labels:
       - docker-base-update
@@ -40,7 +45,10 @@ updates:
       interval: weekly
     groups:
       docker-patch:
-        update-types: ["version-update:semver-patch"]
+        patterns:
+          - "*"
+        update-types:
+          - "version-update:semver-patch"
     open-pull-requests-limit: 5
     labels:
       - docker-base-update
@@ -51,7 +59,10 @@ updates:
       interval: weekly
     groups:
       docker-patch:
-        update-types: ["version-update:semver-patch"]
+        patterns:
+          - "*"
+        update-types:
+          - "version-update:semver-patch"
     open-pull-requests-limit: 5
     labels:
       - docker-base-update
@@ -62,7 +73,10 @@ updates:
       interval: weekly
     groups:
       docker-patch:
-        update-types: ["version-update:semver-patch"]
+        patterns:
+          - "*"
+        update-types:
+          - "version-update:semver-patch"
     open-pull-requests-limit: 5
     labels:
       - docker-base-update
@@ -73,7 +87,10 @@ updates:
       interval: weekly
     groups:
       docker-patch:
-        update-types: ["version-update:semver-patch"]
+        patterns:
+          - "*"
+        update-types:
+          - "version-update:semver-patch"
     open-pull-requests-limit: 5
     labels:
       - docker-base-update
@@ -84,7 +101,10 @@ updates:
       interval: weekly
     groups:
       docker-patch:
-        update-types: ["version-update:semver-patch"]
+        patterns:
+          - "*"
+        update-types:
+          - "version-update:semver-patch"
     open-pull-requests-limit: 5
     labels:
       - docker-base-update
@@ -95,7 +115,10 @@ updates:
       interval: weekly
     groups:
       docker-patch:
-        update-types: ["version-update:semver-patch"]
+        patterns:
+          - "*"
+        update-types:
+          - "version-update:semver-patch"
     open-pull-requests-limit: 5
     labels:
       - docker-base-update
@@ -106,7 +129,10 @@ updates:
       interval: weekly
     groups:
       docker-patch:
-        update-types: ["version-update:semver-patch"]
+        patterns:
+          - "*"
+        update-types:
+          - "version-update:semver-patch"
     open-pull-requests-limit: 5
     labels:
       - docker-base-update
@@ -117,7 +143,10 @@ updates:
       interval: weekly
     groups:
       docker-patch:
-        update-types: ["version-update:semver-patch"]
+        patterns:
+          - "*"
+        update-types:
+          - "version-update:semver-patch"
     open-pull-requests-limit: 5
     labels:
       - docker-base-update
@@ -128,7 +157,10 @@ updates:
       interval: weekly
     groups:
       docker-patch:
-        update-types: ["version-update:semver-patch"]
+        patterns:
+          - "*"
+        update-types:
+          - "version-update:semver-patch"
     open-pull-requests-limit: 5
     labels:
       - docker-base-update
@@ -139,7 +171,10 @@ updates:
       interval: weekly
     groups:
       docker-patch:
-        update-types: ["version-update:semver-patch"]
+        patterns:
+          - "*"
+        update-types:
+          - "version-update:semver-patch"
     open-pull-requests-limit: 5
     labels:
       - docker-base-update
