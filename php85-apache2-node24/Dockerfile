@@ -24,3 +24,11 @@ RUN mkdir -p /var/www/html/public
 
 RUN rm -rf /etc/apache2/sites-enabled/*
 COPY ./conf/appconf.conf /etc/apache2/sites-enabled/
+
+HEALTHCHECK \
+      --start-period=30s \
+      --start-interval=1s \
+      --interval=10s \
+      --timeout=1s \
+      --retries=20 \
+      CMD curl --fail -s -o /dev/null -w "%{http_code}" http://localhost/internal/health
