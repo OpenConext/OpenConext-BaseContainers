@@ -9,11 +9,17 @@ on:
   schedule:
     - cron: '0 7 * * *'
   workflow_dispatch:
+  workflow_run:
+    workflows:
+      - "Build the Apache2 container"
+    types:
+      - completed
 
 
 jobs:
   build-push-apache2-shibboleth:
     runs-on: ubuntu-latest
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     permissions:
       packages: write
     steps:

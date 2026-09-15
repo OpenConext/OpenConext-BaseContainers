@@ -9,6 +9,11 @@ on:
   schedule:
     - cron: '30 7 * * *'
   workflow_dispatch:
+  workflow_run:
+    workflows:
+      - "Build the PHP 8.5 Apache2 container"
+    types:
+      - completed
 
 env:
   NAME: "php85-apache2-node24"
@@ -23,6 +28,7 @@ jobs:
   build:
     permissions:
       packages: write
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     strategy:
       matrix:
         arch: ['amd64', 'arm64']
