@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>${OPENCONEXT_INSTANCENAME} - Local logout</title>
+  <meta http-equiv="refresh" content="0;url=${OPENCONEXT_ENGINE_LOGOUT_URL}">
+  <link rel="stylesheet" href="<shibmlp styleSheet/>">
+  <link rel="stylesheet" href="<shibmlp styleSheet2/>">
+</head>
+<body class="index">
+<div id="wrapper">
+
+  <header>
+  <div id="header">
+  </div>
+  </header>
+
+  <main>
+  <div id="main">
+
+    <h1>Local Logout</h1>
+
+    <div class="main-top"></div>
+    <div class="main">
+      <p class="text">
+        <strong>Status of Local Logout:</strong><br>
+        <shibmlp logoutStatus/>
+      </p>
+      <p class="text">
+        You <strong>must</strong> close your browser to complete the logout process.
+      </p>
+
+    </div>
+    <div class="main-bottom"></div>
+    <footer>
+    <div class="bottom">
+      <p>This service is provided by ${OPENCONEXT_INSTANCENAME}.</p>
+    </div>
+    </footer>
+  </div>
+  </main>
+</div>
+
+</body>
+
+</html>
