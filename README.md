@@ -88,6 +88,7 @@ The rootless base images set `USER openconext`, which affects both the build and
    COPY ./config/haproxy.crt /usr/local/share/ca-certificates/haproxy.crt
    RUN update-ca-certificates
    ```
+
 5. **Entrypoint/CMD.** If you override `ENTRYPOINT`, remember that doing so clears the `CMD` inherited from the base image, so set both. You can keep the base entrypoint (which warns when run as root) by only overriding `CMD`, e.g. `CMD ["java","-jar","/app/app.jar"]`.
 
 Example for a Java application:
