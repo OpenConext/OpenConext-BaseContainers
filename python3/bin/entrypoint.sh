@@ -76,7 +76,7 @@ create_user_and_group() {
 if [ $UID -ne 0 ]
 then
     echo "This container need to run as root"
-    echo "Use USER/GROUP environment variables to specify the uid/gid to run as"
+    echo "Use RUNAS_UID/RUNAS_GID environment variables to specify the uid/gid to run as"
 
     exit 1
 fi
