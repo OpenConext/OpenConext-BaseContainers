@@ -1,4 +1,4 @@
-FROM docker.io/library/php:8.5-apache-trixie
+FROM docker.io/library/php:8.6-apache-trixie
 #Some default environment variables. They can be overridden when starting the container
 ENV PHP_MEMORY_LIMIT=128M
 ENV TZ=Europe/Amsterdam
